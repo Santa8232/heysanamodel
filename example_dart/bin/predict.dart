@@ -17,17 +17,19 @@ void main(List<String> args) async {
     print('   dart run example_dart/bin/predict.dart <Age> <Days> <Type> <Activity> <Budget> [Season] [Fitness] [Stay]\n');
     print('   Feature Options:');
     print('     - Type:       Solo | Friends | Family | Couple');
-    print('     - Activity:   Trekking | Boating | Wildlife | Cultural | Historical | Shopping | Adventure');
+    print('     - Activity:   Trekking | Boating | Wildlife | Cultural | Historical | Shopping | Adventure | Pottery | Caving | Waterfalls | Gardens');
     print('     - Season:     Winter | Spring | Summer | Autumn');
     print('     - Fitness:    Relaxed | Moderate | Active');
-    print('     - Stay:       Resort | Homestay | Hotel | Camping\n');
+    print('     - Stay:       Resort | Homestay | Hotel | Camping | Farmstay\n');
     print('   Examples:');
-    print('     - Dzukou Valley: dart run example_dart/bin/predict.dart 24 4 Solo Trekking 160 Summer Active Camping');
-    print('     - Loktak Lake:   dart run example_dart/bin/predict.dart 32 3 Couple Boating 270 Winter Relaxed Resort');
-    print('     - Kangla Fort:   dart run example_dart/bin/predict.dart 45 1 Family Historical 80 Winter Relaxed Hotel');
-    print('     - Shirui Hills:  dart run example_dart/bin/predict.dart 28 5 Friends Adventure 420 Spring Active Homestay');
-    print('     - Keibul Lamjao: dart run example_dart/bin/predict.dart 35 2 Family Wildlife 220 Winter Moderate Homestay');
-    print('     - Ima Keithel:   dart run example_dart/bin/predict.dart 40 1 Family Shopping 180 Winter Relaxed Hotel\n');
+    print('     - Dzukou Valley:  dart run example_dart/bin/predict.dart 24 4 Solo Trekking 160 Summer Active Camping');
+    print('     - Loktak Lake:    dart run example_dart/bin/predict.dart 32 3 Couple Boating 270 Winter Relaxed Resort');
+    print('     - Kangla Fort:    dart run example_dart/bin/predict.dart 45 1 Family Historical 80 Winter Relaxed Hotel');
+    print('     - Shirui Hills:   dart run example_dart/bin/predict.dart 28 5 Friends Adventure 420 Spring Active Homestay');
+    print('     - Andro Village:  dart run example_dart/bin/predict.dart 30 1 Solo Pottery 50 Autumn Relaxed Homestay');
+    print('     - Tamenglong:     dart run example_dart/bin/predict.dart 27 3 Solo Caving 220 Winter Active Camping');
+    print('     - Sadu Chiru:     dart run example_dart/bin/predict.dart 35 2 Family Waterfalls 130 Spring Moderate Resort');
+    print('     - Kakching:       dart run example_dart/bin/predict.dart 48 2 Family Gardens 120 Winter Relaxed Farmstay\n');
     predictArgs = ['26', '4', 'Friends', 'Trekking', '200', 'Summer', 'Active', 'Camping'];
   }
 

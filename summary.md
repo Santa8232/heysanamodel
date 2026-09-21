@@ -8,15 +8,21 @@ Welcome! This document explains what **HeySanaModel** is, what it does, and how 
 
 Imagine a visitor wants to travel to Manipur. They have a certain budget, a duration, travel group, preferred activity, season, fitness pace, and stay preference.
 
-**HeySanaModel** is a smart AI helper that analyzes all 8 dimensions of their traveller profile and automatically recommends the perfect **place to visit in Manipur**:
+**HeySanaModel** is a smart AI helper that analyzes all 8 dimensions of their traveller profile and automatically recommends the perfect **place to visit in Manipur** along with matching **Curated Trip Plan Combos**:
 - 🌊 **Loktak Lake** (Boating, floating phumdis & sendra island)
 - 🌿 **Dzukou Valley** (Trekking, camping & scenic rolling valleys)
 - 🏰 **Kangla Fort** (Ancient historical palace & Sanamahi temple)
 - 🦌 **Keibul Lamjao** (Floating national park & endangered Sangai deer)
 - 🌸 **Shirui Hills** (Ukhrul mountain trekking & rare Shirui lilies)
 - 🛍️ **Ima Keithel** (World-famous 500-year-old all-women market)
+- 🏺 **Andro Cultural Village** (Ancient coil pottery & sacred perpetual flame)
+- 🦇 **Tamenglong Caves & Cascades** (Tharon limestone cave, Barak falls & hornbills)
+- 💦 **Sadu Chiru Waterfalls** (Triple-tier cascades & cooling mountain spray)
+- 🌹 **Kakching & Southern Valleys** (Uyok Ching hilltop rose gardens & heritage)
 
-It also gives them rich tourist details: **District/Location**, **Highlights**, **Best Season to Visit**, **Authentic Local Food to Try**, **Match Confidence %**, and **Cost converted to Indian Rupees (INR)**!
+It also gives them:
+- **District/Location**, **Highlights**, **Best Season**, and **Local Food to Try**!
+- 🗺️ **Matching Curated Trip Plan Combo**: Recommended package title, tagline, suggested homestay, dining spots, and package budget in INR!
 
 ---
 
@@ -73,6 +79,13 @@ dart run example_dart/bin/predict.dart 24 4 Solo Trekking 160 Summer Active Camp
 # 2. Test Loktak Lake (Boating, Winter, Relaxed, Resort):
 dart run example_dart/bin/predict.dart 32 3 Couple Boating 270 Winter Relaxed Resort
 
-# 3. Test Keibul Lamjao (Wildlife, Winter, Moderate, Homestay):
-dart run example_dart/bin/predict.dart 35 2 Family Wildlife 220 Winter Moderate Homestay
+# 3. Test Andro Cultural Village (Pottery, Autumn, Relaxed, Homestay):
+dart run example_dart/bin/predict.dart 30 1 Solo Pottery 50 Autumn Relaxed Homestay
+
+# 4. Test Tamenglong Rainforest (Caving, Winter, Active, Camping):
+dart run example_dart/bin/predict.dart 27 3 Solo Caving 220 Winter Active Camping
+
+# 5. Test Sadu Chiru Waterfalls (Waterfalls, Spring, Moderate, Resort):
+dart run example_dart/bin/predict.dart 35 2 Family Waterfalls 130 Spring Moderate Resort
 ```
+

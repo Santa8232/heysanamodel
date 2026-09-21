@@ -125,7 +125,10 @@ class Program
             new TravellerData { Age = 32, DurationDays = 3, TravelerType = "Couple", PreferredActivity = "Boating", BudgetUSD = 270, Season = "Winter", FitnessLevel = "Relaxed", StayPreference = "Resort" },
             new TravellerData { Age = 45, DurationDays = 1, TravelerType = "Family", PreferredActivity = "Historical", BudgetUSD = 80, Season = "Winter", FitnessLevel = "Relaxed", StayPreference = "Hotel" },
             new TravellerData { Age = 28, DurationDays = 5, TravelerType = "Friends", PreferredActivity = "Adventure", BudgetUSD = 420, Season = "Spring", FitnessLevel = "Active", StayPreference = "Homestay" },
-            new TravellerData { Age = 40, DurationDays = 1, TravelerType = "Family", PreferredActivity = "Shopping", BudgetUSD = 180, Season = "Winter", FitnessLevel = "Relaxed", StayPreference = "Hotel" }
+            new TravellerData { Age = 30, DurationDays = 1, TravelerType = "Solo", PreferredActivity = "Pottery", BudgetUSD = 50, Season = "Autumn", FitnessLevel = "Relaxed", StayPreference = "Homestay" },
+            new TravellerData { Age = 27, DurationDays = 3, TravelerType = "Solo", PreferredActivity = "Caving", BudgetUSD = 220, Season = "Winter", FitnessLevel = "Active", StayPreference = "Camping" },
+            new TravellerData { Age = 35, DurationDays = 2, TravelerType = "Family", PreferredActivity = "Waterfalls", BudgetUSD = 130, Season = "Spring", FitnessLevel = "Moderate", StayPreference = "Resort" },
+            new TravellerData { Age = 48, DurationDays = 2, TravelerType = "Family", PreferredActivity = "Gardens", BudgetUSD = 120, Season = "Winter", FitnessLevel = "Relaxed", StayPreference = "Farmstay" }
         };
 
         foreach (var tc in testCases)
@@ -172,8 +175,8 @@ class Program
             string activity = args[4];
             float budget = float.Parse(args[5]);
             string season = args.Length > 6 ? args[6] : "Winter";
-            string fitness = args.Length > 7 ? args[7] : (activity.ToLower().Contains("trek") ? "Active" : "Relaxed");
-            string stay = args.Length > 8 ? args[8] : (activity.ToLower().Contains("trek") ? "Camping" : "Resort");
+            string fitness = args.Length > 7 ? args[7] : (activity.ToLower().Contains("trek") || activity.ToLower().Contains("cav") ? "Active" : "Relaxed");
+            string stay = args.Length > 8 ? args[8] : (activity.ToLower().Contains("trek") || activity.ToLower().Contains("cav") ? "Camping" : "Resort");
 
             var input = new TravellerData
             {
@@ -211,7 +214,7 @@ class Program
         string typeInput = Console.ReadLine() ?? "Friends";
         if (string.IsNullOrWhiteSpace(typeInput)) typeInput = "Friends";
 
-        Console.Write("4. Preferred Activity (Trekking / Boating / Cultural / Wildlife / Historical / Shopping / Camping / Nature): ");
+        Console.Write("4. Preferred Activity (Trekking / Boating / Cultural / Wildlife / Historical / Shopping / Pottery / Caving / Waterfalls / Gardens): ");
         string actInput = Console.ReadLine() ?? "Trekking";
         if (string.IsNullOrWhiteSpace(actInput)) actInput = "Trekking";
 
@@ -228,7 +231,7 @@ class Program
         string fitInput = Console.ReadLine() ?? "Moderate";
         if (string.IsNullOrWhiteSpace(fitInput)) fitInput = "Moderate";
 
-        Console.Write("8. Stay Preference (Camping / Homestay / Hotel / Resort): ");
+        Console.Write("8. Stay Preference (Camping / Homestay / Hotel / Resort / Farmstay): ");
         string stayInput = Console.ReadLine() ?? "Homestay";
         if (string.IsNullOrWhiteSpace(stayInput)) stayInput = "Homestay";
 
@@ -251,13 +254,13 @@ class Program
     static void DisplayRichRecommendation(TravellerData input, TravellerPrediction pred)
     {
         var details = GetPlaceDetails(pred.PredictedPlace);
+        var combo = GetMatchingTripPlan(pred.PredictedPlace, input.DurationDays);
         double budgetINR = input.BudgetUSD * 85.0; // Approx INR conversion
 
         // Calculate confidence score from logits if available
         float confidencePercent = 95.0f;
         if (pred.Score != null && pred.Score.Length > 0)
         {
-            // Softmax
             var expScores = pred.Score.Select(s => Math.Exp(s)).ToArray();
             double sumExp = expScores.Sum();
             if (sumExp > 0)
@@ -271,7 +274,7 @@ class Program
         Console.WriteLine("==================================================");
         Console.WriteLine($"👤 Tourist Profile:");
         Console.WriteLine($"   - Age & Group:        {input.Age} yrs ({input.TravelerType})");
-        Console.WriteLine($"   - Duration:           {input.DurationDays} Days");
+        Console.WriteLine($"   - Duration:           {input.DurationDays} Day(s)");
         Console.WriteLine($"   - Preferred Activity: {input.PreferredActivity}");
         Console.WriteLine($"   - Travel Season:      {input.Season}");
         Console.WriteLine($"   - Fitness & Stay:     {input.FitnessLevel} pace | {input.StayPreference}");
@@ -280,10 +283,135 @@ class Program
         Console.WriteLine($"📍 Recommended Place:   🌟 {pred.PredictedPlace} 🌟");
         Console.WriteLine($"📊 Match Confidence:    {confidencePercent:F1}% Match");
         Console.WriteLine($"🏛️ District & Location: {details.District}");
-        Console.WriteLine($"✨ Highlights:          {details.Highlights}");
+        Console.WriteLine($"✨ Place Highlights:    {details.Highlights}");
         Console.WriteLine($"🗓️ Best Time to Visit:  {details.BestSeason}");
         Console.WriteLine($"🍲 Local Food to Try:   {details.Food}");
+        Console.WriteLine("--------------------------------------------------");
+        Console.WriteLine($"🗺️ Matching Trip Plan:  🎁 {combo.Title}");
+        Console.WriteLine($"   - Tagline:            {combo.Tagline}");
+        Console.WriteLine($"   - Plan Duration:      {combo.DurationDays} Day(s)");
+        Console.WriteLine($"   - Estimated Budget:   {combo.BudgetINR}");
+        Console.WriteLine($"   - Curated Stay:       🏡 {combo.Homestay}");
+        Console.WriteLine($"   - Dining Pick:        🍽️  {combo.Dining}");
+        Console.WriteLine($"   - Package Highlights: {combo.Highlights}");
         Console.WriteLine("==================================================\n");
+    }
+
+    static (string Title, string Tagline, int DurationDays, string BudgetINR, string Homestay, string Dining, string Highlights) GetMatchingTripPlan(string place, float durationDays)
+    {
+        if (durationDays >= 5)
+        {
+            return (
+                "The Grand Manipur Discovery Circuit",
+                "The Ultimate 5-Day Highlights of Manipur",
+                5,
+                "₹15,000 - ₹22,000",
+                "Sendra Floating Cottages & Resort",
+                "Luxmi Kitchen, Forage Bistro, Moirang Fish Kitchen, Chahao Studio",
+                "Quintessential Manipur journey covering royal palaces, floating lakes, alpine peaks, and regional feasts"
+            );
+        }
+
+        if (place.Contains("Loktak") || place.Contains("Keibul"))
+        {
+            return (
+                "The Mystic Loktak Floating Escape",
+                "Sunset Phumdi Safari & Sangai Wildlife Discovery",
+                2,
+                "₹5,500 - ₹7,500",
+                "Sendra Floating Cottages & Resort",
+                "Moirang Fresh Fish & Loktak Eatery, Sendra Island Lakeview Restaurant",
+                "Phumdi boat cruise, dawn Sangai deer spotting, golden sunset dining over the lake"
+            );
+        }
+
+        if (place.Contains("Kangla") || place.Contains("Ima Keithel"))
+        {
+            return (
+                "Royal Imphal & Living Cultural Legacy",
+                "Fortress Ruins, Classical Dance & Mother's Market",
+                1,
+                "₹2,000 - ₹3,500",
+                "Sanaleibak Heritage Boutique Stay",
+                "Luxmi Kitchen, Chakluk Indigenous Meitei Kitchen, Chahao Black Rice Dessert Studio",
+                "Morning royal darshan at Govindajee, ancient Kangla coronation halls, shopping at 500-yr women's market"
+            );
+        }
+
+        if (place.Contains("Shirui"))
+        {
+            return (
+                "Shirui Peak & Tangkhul Highlands Trek",
+                "Lily Summits, Pine Ridges & Paleolithic Caves",
+                3,
+                "₹7,000 - ₹9,500",
+                "Shirui Peak Pineview Homestay",
+                "Ukhrul Hilltop Smoked Meat House",
+                "Alpine trek to Shirui summit, exploring prehistoric limestone cave chambers, bonfire under star-filled skies"
+            );
+        }
+
+        if (place.Contains("Dzukou"))
+        {
+            return (
+                "Dzukou Valley & Northern Mystique Expedition",
+                "Rolling Emerald Hills & Ancient Stone Monoliths",
+                2,
+                "₹4,500 - ₹6,500",
+                "Dzukou Trekker's Base Camp Stay",
+                "Café 24 Lounge, The Asian Kitchen Imphal",
+                "High-altitude trek across endless green meadow ridges, photography at Willong's giant monoliths"
+            );
+        }
+
+        if (place.Contains("Andro"))
+        {
+            return (
+                "Andro Pottery & Countryside Craft Trail",
+                "Ancient Coil Pottery, Sacred Flame & Brookside Eco Park",
+                1,
+                "₹1,800 - ₹2,800",
+                "Andro Village Clay Pottery Homestay",
+                "Chakluk Indigenous Kitchen, Forage Organic Café",
+                "Handmade coil pottery masterclass, witnessing ancient sacred fire, peaceful stroll by Santhei brook"
+            );
+        }
+
+        if (place.Contains("Tamenglong"))
+        {
+            return (
+                "Wild Tamenglong Rainforest & Caves Safari",
+                "Subterranean Caverns, Seven Cascades & Hornbill Orchards",
+                3,
+                "₹8,000 - ₹11,000",
+                "Tamenglong Rainforest Hornbill Cottage",
+                "Ukhrul Smoked Meat House, Churachandpur Café de Tribal",
+                "Spelunking through 655m limestone labyrinth of Tharon Cave, 7-step Barak falls trek, Zeilad Lake safari"
+            );
+        }
+
+        if (place.Contains("Sadu Chiru") || place.Contains("Kakching"))
+        {
+            return (
+                "Southern Valleys & Waterfalls Odyssey",
+                "Triple-Tier Cascades, Ancient Brick Temple & Hilltop Botanical Gardens",
+                2,
+                "₹4,200 - ₹6,000",
+                "Kakching Serene Valley Farmstay",
+                "Meitei Ningol Kitchen, Sendra Island Lakeview Restaurant",
+                "Morning dip at forest amphitheater of Sadu Chiru waterfalls, 550-yr brick architecture, sunset hilltop tea"
+            );
+        }
+
+        return (
+            "The Grand Manipur Discovery Circuit",
+            "The Ultimate Highlights of Manipur",
+            3,
+            "₹8,000 - ₹12,000",
+            "Sanaleibak Heritage Boutique Stay",
+            "Luxmi Kitchen, Local Eateries",
+            "Iconic natural wonders, living cultural heritage, and regional gastronomy"
+        );
     }
 
     static (string District, string Highlights, string BestSeason, string Food) GetPlaceDetails(string place)
@@ -325,6 +453,30 @@ class Program
                 "500-year-old historic market run exclusively by 5,000+ women vendors, handloom & crafts",
                 "Year-round (Especially lively during festivals like Ningol Chakouba)",
                 "Singju, Yongchak (Tree bean) dishes, seasonal local fruits"
+            ),
+            "Andro Cultural Village" => (
+                "Imphal East District",
+                "Centuries-old wheel-less coil pottery, sacred perpetual fire (Mei Houba), Santhei eco park brook",
+                "September to May (Pleasant weather for craft workshops)",
+                "Traditional fermented brews, Sekmai smoked snacks, organic hill vegetables"
+            ),
+            "Tamenglong Caves & Cascades" => (
+                "Tamenglong District",
+                "Tharon 655m prehistoric limestone cave, Barak seven tiered waterfalls, Zeilad lake sanctuary, hornbill spotting",
+                "October to April (Amur Falcon roosting season in Nov)",
+                "Rongmei smoked pork with bamboo shoots, roasted oranges, wild mountain honey"
+            ),
+            "Sadu Chiru Waterfalls" => (
+                "Kangpokpi District / Leimaram",
+                "Spectacular triple-tier mountain cascade, secluded forest amphitheater, natural cooling spray pool",
+                "September to April (Lush greenery and refreshing waters)",
+                "Local forest fruit skewers, hot paknam, herbal hill tea"
+            ),
+            "Kakching & Southern Valleys" => (
+                "Kakching District",
+                "Uyok Ching hilltop rose gardens, panoramic valley vistas, 15th-century Vishnu temple, Pumlenpat wetland",
+                "October to May (Flower blooms and pleasant breezes)",
+                "Kakching roasted corn, fresh fish curry, sweet rice snacks"
             ),
             _ => (
                 "Manipur",

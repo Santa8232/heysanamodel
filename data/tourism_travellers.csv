@@ -47,3 +47,35 @@ Age,DurationDays,TravelerType,PreferredActivity,BudgetUSD,Season,FitnessLevel,St
 31,1,Solo,Cultural,110,Autumn,Relaxed,Hotel,Ima Keithel
 44,2,Family,Handloom,240,Winter,Relaxed,Hotel,Ima Keithel
 37,1,Couple,Shopping,160,Spring,Relaxed,Hotel,Ima Keithel
+30,1,Solo,Pottery,50,Autumn,Relaxed,Homestay,Andro Cultural Village
+36,1,Couple,Craft,80,Winter,Relaxed,Homestay,Andro Cultural Village
+42,2,Family,Cultural,110,Spring,Relaxed,Hotel,Andro Cultural Village
+27,1,Friends,Pottery,70,Autumn,Relaxed,Homestay,Andro Cultural Village
+49,1,Couple,Craft,90,Winter,Relaxed,Homestay,Andro Cultural Village
+33,2,Family,Cultural,100,Spring,Relaxed,Hotel,Andro Cultural Village
+25,1,Solo,Craft,60,Autumn,Relaxed,Homestay,Andro Cultural Village
+38,2,Couple,Pottery,85,Winter,Relaxed,Homestay,Andro Cultural Village
+27,3,Solo,Caving,220,Winter,Active,Camping,Tamenglong Caves & Cascades
+29,4,Friends,Adventure,310,Autumn,Active,Camping,Tamenglong Caves & Cascades
+32,3,Couple,Rainforest,280,Spring,Moderate,Homestay,Tamenglong Caves & Cascades
+25,4,Friends,Caving,300,Winter,Active,Camping,Tamenglong Caves & Cascades
+35,3,Couple,Adventure,290,Autumn,Moderate,Homestay,Tamenglong Caves & Cascades
+28,3,Solo,Rainforest,240,Spring,Active,Homestay,Tamenglong Caves & Cascades
+31,4,Friends,Waterfalls,320,Winter,Active,Camping,Tamenglong Caves & Cascades
+34,3,Couple,Caving,270,Autumn,Moderate,Homestay,Tamenglong Caves & Cascades
+35,2,Family,Waterfalls,130,Spring,Moderate,Resort,Sadu Chiru Waterfalls
+29,1,Couple,Nature,90,Autumn,Relaxed,Farmstay,Sadu Chiru Waterfalls
+26,2,Friends,Waterfalls,110,Summer,Moderate,Hotel,Sadu Chiru Waterfalls
+41,2,Family,Relaxation,150,Winter,Relaxed,Resort,Sadu Chiru Waterfalls
+32,1,Couple,Nature,85,Spring,Relaxed,Farmstay,Sadu Chiru Waterfalls
+28,2,Friends,Waterfalls,120,Autumn,Moderate,Hotel,Sadu Chiru Waterfalls
+38,1,Solo,Sightseeing,75,Winter,Relaxed,Farmstay,Sadu Chiru Waterfalls
+44,2,Family,Nature,140,Spring,Relaxed,Resort,Sadu Chiru Waterfalls
+48,2,Family,Gardens,120,Winter,Relaxed,Farmstay,Kakching & Southern Valleys
+39,1,Couple,Scenic,80,Autumn,Relaxed,Farmstay,Kakching & Southern Valleys
+33,2,Friends,Heritage,100,Spring,Relaxed,Hotel,Kakching & Southern Valleys
+54,2,Family,Scenic,140,Winter,Relaxed,Resort,Kakching & Southern Valleys
+36,1,Couple,Gardens,90,Spring,Relaxed,Farmstay,Kakching & Southern Valleys
+30,2,Friends,Sightseeing,95,Autumn,Relaxed,Hotel,Kakching & Southern Valleys
+45,2,Family,Gardens,130,Winter,Relaxed,Farmstay,Kakching & Southern Valleys
+31,1,Solo,Heritage,70,Spring,Relaxed,Hotel,Kakching & Southern Valleys
