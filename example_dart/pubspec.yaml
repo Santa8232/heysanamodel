@@ -1,5 +1,5 @@
 name: example_dart
-description: A simple Dart script to load and test the ONNX model from GitHub Raw URL or local file.
+description: Pure Dart CLI client to test and evaluate the HeySanaModel Manipur Tourism AI recommendation system.
 version: 1.0.0
 
 environment:
@@ -8,7 +8,6 @@ environment:
 dependencies:
   http: ^1.2.0
   path: ^1.9.0
-  onnxruntime: ^1.1.0
 
 dev_dependencies:
   lints: ^3.0.0
