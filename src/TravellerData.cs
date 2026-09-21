@@ -21,5 +21,14 @@ public class TravellerData
     public float BudgetUSD { get; set; }
 
     [LoadColumn(5)]
+    public string Season { get; set; } = "Winter";
+
+    [LoadColumn(6)]
+    public string FitnessLevel { get; set; } = "Moderate";
+
+    [LoadColumn(7)]
+    public string StayPreference { get; set; } = "Homestay";
+
+    [LoadColumn(8)]
     public string VisitedPlace { get; set; } = string.Empty;
 }

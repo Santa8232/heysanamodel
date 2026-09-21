@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using Microsoft.ML;
 using Microsoft.ML.Transforms;
 
@@ -22,6 +23,7 @@ class Program
         // Default: Full Model Training & ONNX Export
         Console.WriteLine("==================================================");
         Console.WriteLine("   Starting Manipur Tourism ML.NET Model Training ");
+        Console.WriteLine("   (With Rich Multi-Feature Context: Season, Fitness, Stay)");
         Console.WriteLine("==================================================");
 
         // Find data directory
@@ -49,20 +51,26 @@ class Program
         // Split data 80% train, 20% test
         var splitData = mlContext.Data.TrainTestSplit(dataView, testFraction: 0.2);
 
-        // Define ML Pipeline predicting VisitedPlace
+        // Define Multi-Feature ML Pipeline
         var pipeline = mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "Label", inputColumnName: nameof(TravellerData.VisitedPlace))
             .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "TravelerTypeFeat", inputColumnName: nameof(TravellerData.TravelerType)))
             .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "PreferredActivityFeat", inputColumnName: nameof(TravellerData.PreferredActivity)))
+            .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "SeasonFeat", inputColumnName: nameof(TravellerData.Season)))
+            .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "FitnessFeat", inputColumnName: nameof(TravellerData.FitnessLevel)))
+            .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "StayFeat", inputColumnName: nameof(TravellerData.StayPreference)))
             .Append(mlContext.Transforms.Concatenate("Features",
                 nameof(TravellerData.Age),
                 nameof(TravellerData.DurationDays),
                 "TravelerTypeFeat",
                 "PreferredActivityFeat",
+                "SeasonFeat",
+                "FitnessFeat",
+                "StayFeat",
                 nameof(TravellerData.BudgetUSD)))
             .Append(mlContext.MulticlassClassification.Trainers.SdcaMaximumEntropy(labelColumnName: "Label", featureColumnName: "Features"))
             .Append(mlContext.Transforms.Conversion.MapKeyToValue(outputColumnName: "PredictedLabel", inputColumnName: "PredictedLabel"));
 
-        Console.WriteLine("Training model on Manipur tourist destinations...");
+        Console.WriteLine("Training model on multi-feature Manipur tourist destinations...");
         var trainedModel = pipeline.Fit(splitData.TrainSet);
 
         // Evaluate model
@@ -105,27 +113,25 @@ class Program
             Console.WriteLine($"Note: ONNX export notice: {ex.Message}");
         }
 
-        // 3. Live Sample Prediction Demo
+        // 3. Live Sample Prediction Demo with rich details
         Console.WriteLine("\n--------------------------------------------------");
-        Console.WriteLine("🧪 Running Manipur Tourist Place Prediction Demo:");
+        Console.WriteLine("🧪 Running Multi-Feature Manipur Prediction Demo:");
         Console.WriteLine("--------------------------------------------------");
         var predEngine = mlContext.Model.CreatePredictionEngine<TravellerData, TravellerPrediction>(trainedModel);
 
         var testCases = new[]
         {
-            new TravellerData { Age = 24, DurationDays = 4, TravelerType = "Solo", PreferredActivity = "Trekking", BudgetUSD = 180 },
-            new TravellerData { Age = 32, DurationDays = 3, TravelerType = "Couple", PreferredActivity = "Boating", BudgetUSD = 270 },
-            new TravellerData { Age = 45, DurationDays = 1, TravelerType = "Family", PreferredActivity = "Historical", BudgetUSD = 90 },
-            new TravellerData { Age = 35, DurationDays = 3, TravelerType = "Family", PreferredActivity = "Wildlife", BudgetUSD = 320 },
-            new TravellerData { Age = 28, DurationDays = 5, TravelerType = "Friends", PreferredActivity = "Adventure", BudgetUSD = 440 },
-            new TravellerData { Age = 40, DurationDays = 1, TravelerType = "Family", PreferredActivity = "Shopping", BudgetUSD = 170 }
+            new TravellerData { Age = 24, DurationDays = 4, TravelerType = "Solo", PreferredActivity = "Trekking", BudgetUSD = 160, Season = "Summer", FitnessLevel = "Active", StayPreference = "Camping" },
+            new TravellerData { Age = 32, DurationDays = 3, TravelerType = "Couple", PreferredActivity = "Boating", BudgetUSD = 270, Season = "Winter", FitnessLevel = "Relaxed", StayPreference = "Resort" },
+            new TravellerData { Age = 45, DurationDays = 1, TravelerType = "Family", PreferredActivity = "Historical", BudgetUSD = 80, Season = "Winter", FitnessLevel = "Relaxed", StayPreference = "Hotel" },
+            new TravellerData { Age = 28, DurationDays = 5, TravelerType = "Friends", PreferredActivity = "Adventure", BudgetUSD = 420, Season = "Spring", FitnessLevel = "Active", StayPreference = "Homestay" },
+            new TravellerData { Age = 40, DurationDays = 1, TravelerType = "Family", PreferredActivity = "Shopping", BudgetUSD = 180, Season = "Winter", FitnessLevel = "Relaxed", StayPreference = "Hotel" }
         };
 
         foreach (var tc in testCases)
         {
             var result = predEngine.Predict(tc);
-            Console.WriteLine($"Tourist: Age {tc.Age}, {tc.DurationDays} Days, {tc.TravelerType}, {tc.PreferredActivity}, ${tc.BudgetUSD}");
-            Console.WriteLine($"  ➔ Recommended Place: [{result.PredictedPlace}]\n");
+            DisplayRichRecommendation(tc, result);
         }
 
         Console.WriteLine("==================================================");
@@ -157,7 +163,7 @@ class Program
 
         var predEngine = mlContext.Model.CreatePredictionEngine<TravellerData, TravellerPrediction>(loadedModel);
 
-        // Scenario A: Arguments provided: --predict <Age> <DurationDays> <TravelerType> <PreferredActivity> <BudgetUSD>
+        // Scenario A: Arguments provided: --predict <Age> <DurationDays> <TravelerType> <PreferredActivity> <BudgetUSD> [Season] [FitnessLevel] [StayPreference]
         if (args.Length >= 6)
         {
             float age = float.Parse(args[1]);
@@ -165,6 +171,9 @@ class Program
             string type = args[3];
             string activity = args[4];
             float budget = float.Parse(args[5]);
+            string season = args.Length > 6 ? args[6] : "Winter";
+            string fitness = args.Length > 7 ? args[7] : (activity.ToLower().Contains("trek") ? "Active" : "Relaxed");
+            string stay = args.Length > 8 ? args[8] : (activity.ToLower().Contains("trek") ? "Camping" : "Resort");
 
             var input = new TravellerData
             {
@@ -172,53 +181,56 @@ class Program
                 DurationDays = days,
                 TravelerType = type,
                 PreferredActivity = activity,
-                BudgetUSD = budget
+                BudgetUSD = budget,
+                Season = season,
+                FitnessLevel = fitness,
+                StayPreference = stay
             };
 
             var pred = predEngine.Predict(input);
-
-            Console.WriteLine("==================================================");
-            Console.WriteLine("   HeySanaModel - Manipur Place Recommendation    ");
-            Console.WriteLine("==================================================");
-            Console.WriteLine($"👤 Tourist Profile:");
-            Console.WriteLine($"   - Age:                {input.Age} years");
-            Console.WriteLine($"   - Trip Duration:      {input.DurationDays} days");
-            Console.WriteLine($"   - Traveler Type:      {input.TravelerType}");
-            Console.WriteLine($"   - Preferred Activity: {input.PreferredActivity}");
-            Console.WriteLine($"   - Budget:             ${input.BudgetUSD:N0} USD");
-            Console.WriteLine("--------------------------------------------------");
-            Console.WriteLine($"📍 Recommended Place:   🌟 {pred.PredictedPlace} 🌟");
-            Console.WriteLine("==================================================");
+            DisplayRichRecommendation(input, pred);
             return;
         }
 
         // Scenario B: Interactive CLI prompts
         Console.WriteLine("==================================================");
-        Console.WriteLine("  HeySanaModel - Manipur Tourist Place Predictor  ");
+        Console.WriteLine("  HeySanaModel - Interactive Tourist Place Predictor");
         Console.WriteLine("==================================================");
 
-        Console.Write("Enter Tourist Age (e.g. 26): ");
+        Console.Write("1. Tourist Age (e.g. 26): ");
         string ageInput = Console.ReadLine() ?? "26";
         float.TryParse(ageInput, out float parsedAge);
         if (parsedAge == 0) parsedAge = 26;
 
-        Console.Write("Enter Trip Duration in Days (e.g. 3): ");
-        string daysInput = Console.ReadLine() ?? "3";
+        Console.Write("2. Trip Duration in Days (e.g. 4): ");
+        string daysInput = Console.ReadLine() ?? "4";
         float.TryParse(daysInput, out float parsedDays);
-        if (parsedDays == 0) parsedDays = 3;
+        if (parsedDays == 0) parsedDays = 4;
 
-        Console.Write("Enter Traveler Type (Solo / Friends / Family / Couple): ");
+        Console.Write("3. Traveler Type (Solo / Friends / Family / Couple): ");
         string typeInput = Console.ReadLine() ?? "Friends";
         if (string.IsNullOrWhiteSpace(typeInput)) typeInput = "Friends";
 
-        Console.Write("Enter Preferred Activity (Trekking / Boating / Cultural / Wildlife / Historical / Shopping / Camping / Nature): ");
+        Console.Write("4. Preferred Activity (Trekking / Boating / Cultural / Wildlife / Historical / Shopping / Camping / Nature): ");
         string actInput = Console.ReadLine() ?? "Trekking";
         if (string.IsNullOrWhiteSpace(actInput)) actInput = "Trekking";
 
-        Console.Write("Enter Budget in USD (e.g. 200): ");
+        Console.Write("5. Budget in USD (e.g. 200): ");
         string budgetInput = Console.ReadLine() ?? "200";
         float.TryParse(budgetInput, out float parsedBudget);
         if (parsedBudget == 0) parsedBudget = 200;
+
+        Console.Write("6. Travel Season (Winter / Spring / Summer / Autumn): ");
+        string seasonInput = Console.ReadLine() ?? "Winter";
+        if (string.IsNullOrWhiteSpace(seasonInput)) seasonInput = "Winter";
+
+        Console.Write("7. Fitness Level (Relaxed / Moderate / Active): ");
+        string fitInput = Console.ReadLine() ?? "Moderate";
+        if (string.IsNullOrWhiteSpace(fitInput)) fitInput = "Moderate";
+
+        Console.Write("8. Stay Preference (Camping / Homestay / Hotel / Resort): ");
+        string stayInput = Console.ReadLine() ?? "Homestay";
+        if (string.IsNullOrWhiteSpace(stayInput)) stayInput = "Homestay";
 
         var interactiveInput = new TravellerData
         {
@@ -226,14 +238,100 @@ class Program
             DurationDays = parsedDays,
             TravelerType = typeInput,
             PreferredActivity = actInput,
-            BudgetUSD = parsedBudget
+            BudgetUSD = parsedBudget,
+            Season = seasonInput,
+            FitnessLevel = fitInput,
+            StayPreference = stayInput
         };
 
         var interactiveResult = predEngine.Predict(interactiveInput);
+        DisplayRichRecommendation(interactiveInput, interactiveResult);
+    }
 
-        Console.WriteLine("\n--------------------------------------------------");
-        Console.WriteLine($"👤 Tourist Profile: Age {parsedAge}, {parsedDays} Days, {typeInput}, {actInput}, ${parsedBudget:N0}");
-        Console.WriteLine($"📍 Recommended Place: 🌟 {interactiveResult.PredictedPlace} 🌟");
+    static void DisplayRichRecommendation(TravellerData input, TravellerPrediction pred)
+    {
+        var details = GetPlaceDetails(pred.PredictedPlace);
+        double budgetINR = input.BudgetUSD * 85.0; // Approx INR conversion
+
+        // Calculate confidence score from logits if available
+        float confidencePercent = 95.0f;
+        if (pred.Score != null && pred.Score.Length > 0)
+        {
+            // Softmax
+            var expScores = pred.Score.Select(s => Math.Exp(s)).ToArray();
+            double sumExp = expScores.Sum();
+            if (sumExp > 0)
+            {
+                confidencePercent = (float)((expScores.Max() / sumExp) * 100.0);
+            }
+        }
+
         Console.WriteLine("==================================================");
+        Console.WriteLine("   HeySanaModel - Manipur Place Recommendation    ");
+        Console.WriteLine("==================================================");
+        Console.WriteLine($"👤 Tourist Profile:");
+        Console.WriteLine($"   - Age & Group:        {input.Age} yrs ({input.TravelerType})");
+        Console.WriteLine($"   - Duration:           {input.DurationDays} Days");
+        Console.WriteLine($"   - Preferred Activity: {input.PreferredActivity}");
+        Console.WriteLine($"   - Travel Season:      {input.Season}");
+        Console.WriteLine($"   - Fitness & Stay:     {input.FitnessLevel} pace | {input.StayPreference}");
+        Console.WriteLine($"   - Estimated Budget:   ${input.BudgetUSD:N0} USD (~₹{budgetINR:N0} INR)");
+        Console.WriteLine("--------------------------------------------------");
+        Console.WriteLine($"📍 Recommended Place:   🌟 {pred.PredictedPlace} 🌟");
+        Console.WriteLine($"📊 Match Confidence:    {confidencePercent:F1}% Match");
+        Console.WriteLine($"🏛️ District & Location: {details.District}");
+        Console.WriteLine($"✨ Highlights:          {details.Highlights}");
+        Console.WriteLine($"🗓️ Best Time to Visit:  {details.BestSeason}");
+        Console.WriteLine($"🍲 Local Food to Try:   {details.Food}");
+        Console.WriteLine("==================================================\n");
+    }
+
+    static (string District, string Highlights, string BestSeason, string Food) GetPlaceDetails(string place)
+    {
+        return place switch
+        {
+            "Loktak Lake" => (
+                "Bishnupur District",
+                "World's only floating lake, Sendra island view, floating phumdi homestays, sunset boating",
+                "October to March (Pleasant weather & migratory birds)",
+                "Nga Thongba (Fish curry), Singju (spicy salad), Bora fritters"
+            ),
+            "Dzukou Valley" => (
+                "Senapati District / Border",
+                "Trekking, rolling green valleys, rare Dzukou lily, Helipad campsite, natural caves",
+                "June to September (Flowering season) & October to December",
+                "Campfire noodles, smoked pork, fresh organic valley tea"
+            ),
+            "Kangla Fort" => (
+                "Imphal West (City Centre)",
+                "Ancient royal palace of Manipur, sacred Sanamahi temple, Govindaji ruins, Kangla Sha dragons",
+                "October to April (Ideal city sightseeing)",
+                "Chak-hao Kheer (Black rice pudding), Eromba, Paknam"
+            ),
+            "Keibul Lamjao" => (
+                "Bishnupur District",
+                "World's only floating national park, home to the endangered Sangai brow-antlered deer",
+                "November to April (Best deer sightings at dawn/dusk)",
+                "Ooti (traditional yellow peas dish), Kangshoi (vegetable stew)"
+            ),
+            "Shirui Hills" => (
+                "Ukhrul District",
+                "Shirui Kashong peak trek, sanctuary of the endemic Shirui Lily (Lilium mackliniae)",
+                "May to June (Shirui Lily blooming season)",
+                "Tangkhul smoked pork with bamboo shoot, wild berry wine"
+            ),
+            "Ima Keithel" => (
+                "Imphal West (Khwairamband)",
+                "500-year-old historic market run exclusively by 5,000+ women vendors, handloom & crafts",
+                "Year-round (Especially lively during festivals like Ningol Chakouba)",
+                "Singju, Yongchak (Tree bean) dishes, seasonal local fruits"
+            ),
+            _ => (
+                "Manipur",
+                "Scenic natural beauty, rich culture, and historical landmarks",
+                "Autumn and Winter",
+                "Traditional Manipuri Thali"
+            )
+        };
     }
 }
