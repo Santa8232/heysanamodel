@@ -1,8 +1,8 @@
 # .NET build outputs
-bin/
-obj/
-**/bin/
-**/obj/
+src/bin/
+src/obj/
+**/Debug/
+**/Release/
 
 # Dart & Flutter build outputs
 .dart_tool/
@@ -11,3 +11,6 @@ pubspec.lock
 
 # OS Files
 .DS_Store
+
+# Test downloads
+downloaded_model.onnx
