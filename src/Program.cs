@@ -99,8 +99,28 @@ class Program
             // Fallback: If OnnxConverter needs simpler pipeline, ensure zip is intact
         }
 
+        // 3. Live Sample Prediction Demo
+        Console.WriteLine("\n------------------------------------------");
+        Console.WriteLine("🧪 Running Sample Prediction Demo:");
+        Console.WriteLine("------------------------------------------");
+        var predEngine = mlContext.Model.CreatePredictionEngine<TravellerData, TravellerPrediction>(trainedModel);
+
+        var testCases = new[]
+        {
+            new TravellerData { Age = 23, DurationDays = 3, TravelerType = "Solo", PreferredActivity = "Backpacking", BudgetUSD = 450 },
+            new TravellerData { Age = 30, DurationDays = 7, TravelerType = "Family", PreferredActivity = "Cultural", BudgetUSD = 1500 },
+            new TravellerData { Age = 52, DurationDays = 14, TravelerType = "Couple", PreferredActivity = "Luxury", BudgetUSD = 6500 }
+        };
+
+        foreach (var tc in testCases)
+        {
+            var result = predEngine.Predict(tc);
+            Console.WriteLine($"Tourist: Age {tc.Age}, {tc.DurationDays} Days, {tc.TravelerType}, {tc.PreferredActivity}, ${tc.BudgetUSD}");
+            Console.WriteLine($"  ➔ Recommended Package: [{result.PredictedPackage.ToUpper()}]\n");
+        }
+
         Console.WriteLine("==========================================");
-        Console.WriteLine("Training Completed Successfully!");
+        Console.WriteLine("Training & Demo Completed Successfully!");
         Console.WriteLine("==========================================");
     }
 }

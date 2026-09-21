@@ -10,7 +10,7 @@ void main(List<String> arguments) async {
 
   // 1. GitHub Raw URL & Local File Check
   const githubRawUrl =
-      'https://raw.githubusercontent.com/<your-username>/heysanamodel/main/artifacts/model.onnx';
+      'https://raw.githubusercontent.com/santa8232/heysanamodel/main/artifacts/model.onnx';
 
   final localModelFile = File('../artifacts/model.onnx');
   File targetModelFile;
@@ -53,7 +53,7 @@ void main(List<String> arguments) async {
   print('   - Duration (Days): 7');
   print('   - Traveler Type: Family');
   print('   - Preferred Activity: Cultural');
-  print('   - Budget (USD): $1500');
+  print('   - Budget (USD): \$1500');
 
   // Prepare input feature tensor: [Age, DurationDays, TravelerType_OneHot(4), PreferredActivity_OneHot(4), BudgetUSD]
   final inputData = Float32List.fromList([

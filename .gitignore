@@ -1,0 +1,13 @@
+# .NET build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+
+# Dart & Flutter build outputs
+.dart_tool/
+.packages
+pubspec.lock
+
+# OS Files
+.DS_Store

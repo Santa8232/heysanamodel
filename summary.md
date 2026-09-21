@@ -44,6 +44,7 @@ Your mobile app (built with Flutter) downloads this file from the internet when 
 - 📁 **`src/`**: Contains the C# computer code that teaches the AI.
 - 📁 **`artifacts/`**: Contains the finished AI model file (`model.onnx`).
 - 📁 **`.github/`**: Contains instructions for GitHub to run the automatic training robot.
+- 📁 **`example_dart/`**: Contains sample code showing how a Flutter/Dart app can load and test the AI model.
 - 📄 **`README.md`**: Technical guide for developers.
 - 📄 **`summary.md`**: This simple guide for everyone!
 
