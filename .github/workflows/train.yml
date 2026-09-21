@@ -1,0 +1,48 @@
+name: Train ML Model and Publish Flutter ONNX Model
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'data/**'
+      - 'src/**'
+      - '.github/workflows/train.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  train-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore Dependencies
+        run: dotnet restore src/heysanamodel.csproj
+
+      - name: Train Model & Export ONNX
+        run: dotnet run --project src/heysanamodel.csproj --configuration Release
+
+      - name: Commit and Push Updated Model to Repository
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-train: Update model.onnx and model.zip artifacts"
+          file_pattern: "artifacts/*"
+
+      - name: Upload Artifacts to GitHub Actions Run
+        uses: actions/upload-artifact@v4
+        with:
+          name: tourism-model-artifacts
+          path: artifacts/
