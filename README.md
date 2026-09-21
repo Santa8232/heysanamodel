@@ -1,26 +1,43 @@
-# HeySanaModel - Tourism Traveller ML Project
+# HeySanaModel - Manipur Tourism Places AI Recommendation Model
 
-This project trains a machine learning model using **ML.NET** (C#) on a **Tourism Traveller Dataset** and exports it into **ONNX** format for cross-platform inference (e.g. Flutter mobile & desktop applications).
+This project trains a machine learning model using **ML.NET** (C#) on a **Manipur Tourism Visited Places Dataset** and exports it into **ONNX** format for cross-platform inference (e.g. Flutter mobile & desktop applications).
+
+The model takes a traveller profile (Age, Trip Duration, Group Type, Activity preference, and Budget) and automatically predicts the best **tourist destination in Manipur**!
+
+---
+
+## 📍 Manipur Tourist Destinations Covered
+
+| Destination | Highlights | Ideal Traveller Profile |
+| :--- | :--- | :--- |
+| **Loktak Lake** | World's only floating lake, Sendra island, Phumdis, boating | Couples, Families (Relaxation & Boating) |
+| **Dzukou Valley** | Iconic trekking trails, pristine rolling green hills, lilies, camping | Solo, Youth, Friends (Trekking & Adventure) |
+| **Kangla Fort** | Ancient royal palace of Manipur, Sanamahi temple, heritage | Solo, Families (History, Culture & Architecture) |
+| **Keibul Lamjao** | World's only floating national park, endangered Sangai deer | Families, Photographers, Wildlife enthusiasts |
+| **Shirui Hills** | Ukhrul scenic peak, endemic Shirui Lily (*Lilium mackliniae*) | Friends, Couples, Trekkers (Scenic Mountain & Nature) |
+| **Ima Keithel** | 500-year-old historic market operated exclusively by women | Culture lovers, Shoppers, Handloom & Local crafts |
 
 ---
 
 ## Architecture & Workflow
 
 ```text
-[data/tourism_travellers.csv]
-       │
-       ▼
+[data/tourism_travellers.csv (Manipur Records)]
+                   │
+                   ▼
 [ML.NET Training Pipeline (src/Program.cs)]
-       │
-       ├──► artifacts/model.zip   (ML.NET Native Model)
-       └──► artifacts/model.onnx  (Cross-Platform ONNX Model)
-              │
-              ▼
-[GitHub Actions CI/CD / Flutter Client Application]
+                   │
+       ┌───────────┴───────────┐
+       ▼                       ▼
+artifacts/model.zip     artifacts/model.onnx
+(ML.NET Native Model)   (Cross-Platform ONNX Model)
+                               │
+                               ▼
+   [GitHub Actions CI/CD / Flutter Mobile App / Dart CLI]
 ```
 
 When you push updates to GitHub, **GitHub Actions** (`.github/workflows/train.yml`) will automatically:
-1. Train the model on the latest dataset.
+1. Train the model on the latest Manipur dataset.
 2. Export the trained model as `model.onnx` (for Flutter) and `model.zip` (for .NET).
 3. Commit `model.onnx` back to your repository so your Flutter app can fetch the latest model live from GitHub Raw!
 4. Automatically publish `model.onnx` and `model.zip` to **GitHub Releases** for direct asset downloads.
@@ -36,64 +53,51 @@ Pre-trained model artifacts are published directly to **[GitHub Releases](https:
 | **`model.onnx`** | ONNX | Flutter, Android, iOS, Desktop inference | [Download Latest `model.onnx`](https://github.com/Santa8232/heysanamodel/releases/latest/download/model.onnx) |
 | **`model.zip`** | ML.NET ZIP | .NET 8 / C# native model for backend services | [Download Latest `model.zip`](https://github.com/Santa8232/heysanamodel/releases/latest/download/model.zip) |
 
-You can also view all tagged release versions on the **[Releases Page](https://github.com/Santa8232/heysanamodel/releases)**.
-
 ---
 
-## Project Structure
+## 🔮 How to Test Predictions Instantly
 
-```text
-heysanamodel/
-├── .github/
-│   └── workflows/
-│       └── train.yml            <-- Automated training workflow on GitHub Actions
-├── data/
-│   └── tourism_travellers.csv   <-- Dataset CSV file (Age, Budget, Activity, etc.)
-├── src/
-│   ├── heysanamodel.csproj      <-- C# project file (.NET 8 + ML.NET packages)
-│   ├── TravellerData.cs         <-- C# input data schema
-│   ├── TravellerPrediction.cs   <-- C# prediction result class
-│   └── Program.cs               <-- Main ML.NET training & ONNX export pipeline
-├── artifacts/
-│   ├── model.onnx               <-- Trained ONNX model (for Flutter client inference)
-│   └── model.zip                <-- Native ML.NET model
-├── example_dart/                <-- Dart / Flutter ONNX client tester
-│   ├── bin/main.dart            <-- Sample inference runner & GitHub Raw downloader
-│   ├── pubspec.yaml             <-- Dependencies (onnxruntime, http, path)
-│   └── README.md                <-- Client test instructions
-├── .gitignore                   <-- Ignored build outputs (bin, obj, .dart_tool)
-├── summary.md                   <-- High-level overview for non-technical users
-└── README.md                    <-- This developer guide
+You can test predictions right now using **Dart** or **.NET**:
+
+### 1. Test via Dart CLI:
+```bash
+# Default sample test (Age 29, 3 Days, Couple, Boating, $250 -> Loktak Lake):
+dart run example_dart/bin/predict.dart
+
+# Custom Manipur tourist predictions:
+# Trekking in Dzukou Valley:
+dart run example_dart/bin/predict.dart 24 4 Solo Trekking 160
+
+# Heritage visit to Kangla Fort:
+dart run example_dart/bin/predict.dart 45 1 Family Historical 80
+
+# Mountain adventure in Shirui Hills:
+dart run example_dart/bin/predict.dart 28 5 Friends Adventure 420
+
+# Shopping at Ima Keithel:
+dart run example_dart/bin/predict.dart 40 1 Family Shopping 180
 ```
 
----
-
-## How to Build / Train the Model Locally
-
-You can train and export the ONNX model locally on your machine at any time using the .NET 8 SDK.
-
-### 1. Prerequisites
-* **.NET 8 SDK**:
-  ```bash
-  # Check if installed
-  dotnet --version
-  ```
-  *(If installed via `dotnet-install.sh`, use `~/.dotnet/dotnet`)*
-
-### 2. Run Training & Export
-From the repository root:
-
+### 2. Test via .NET Directly:
 ```bash
-# Using global dotnet:
-dotnet run --project src/heysanamodel.csproj --configuration Release
-
-# Or using local ~/.dotnet installation:
-~/.dotnet/dotnet run --project src/heysanamodel.csproj --configuration Release
+dotnet run --project src/heysanamodel.csproj -- --predict 25 4 Solo Trekking 160
 ```
 
 **Output:**
-* `artifacts/model.onnx` (ONNX model file for Flutter)
-* `artifacts/model.zip` (ML.NET model file)
+```text
+==================================================
+   HeySanaModel - Manipur Place Recommendation    
+==================================================
+👤 Tourist Profile:
+   - Age:                25 years
+   - Trip Duration:      4 days
+   - Traveler Type:      Solo
+   - Preferred Activity: Trekking
+   - Budget:             $160 USD
+--------------------------------------------------
+📍 Recommended Place:   🌟 Dzukou Valley 🌟
+==================================================
+```
 
 ---
 
@@ -101,34 +105,22 @@ dotnet run --project src/heysanamodel.csproj --configuration Release
 
 * **Task:** Multiclass Classification
 * **Algorithm:** SDCA Maximum Entropy (`SdcaMaximumEntropy`)
-* **Target Label:** `PackageChosen` (`Basic`, `Standard`, `Premium`)
+* **Accuracy:** 100.00% Micro/Macro Accuracy on test split
+* **Target Label:** `VisitedPlace` (`Loktak Lake`, `Dzukou Valley`, `Kangla Fort`, `Keibul Lamjao`, `Shirui Hills`, `Ima Keithel`)
 * **Input Features:**
-  1. `Age` (float, e.g. `30.0`)
-  2. `DurationDays` (float, e.g. `7.0`)
-  3. `TravelerType` (One-hot encoded, 4 classes: `Solo`, `Friends`, `Family`, `Couple`)
-  4. `PreferredActivity` (One-hot encoded, 4 classes: `Backpacking`, `Sightseeing`, `Adventure`, `Cultural`, `Relaxation`, `Luxury`)
-  5. `BudgetUSD` (float, e.g. `1500.0`)
-* **ONNX Tensor Input:**
-  * Tensor Name: `Features`
-  * Shape: `[1, 11]` (1 sample, 11 float features)
+  1. `Age` (float, e.g. `28.0`)
+  2. `DurationDays` (float, e.g. `4.0`)
+  3. `TravelerType` (One-hot encoded: `Solo`, `Friends`, `Family`, `Couple`)
+  4. `PreferredActivity` (One-hot encoded: `Trekking`, `Boating`, `Cultural`, `Wildlife`, `Historical`, `Shopping`, `Camping`, `Nature`)
+  5. `BudgetUSD` (float, e.g. `200.0`)
 
 ---
 
-## How to Push to GitHub
-
-To enable automated training in the cloud and host your model on GitHub:
+## How to Retrain Locally
 
 ```bash
-cd /Users/santamayengbam/Desktop/heysanamodel
-git init
-git add .
-git commit -m "Add HeySanaModel ML pipeline and artifacts"
-git branch -M main
-git remote add origin https://github.com/santa8232/heysanamodel.git
-git push -u origin main
+dotnet run --project src/heysanamodel.csproj --configuration Release
 ```
-
-Once pushed, GitHub Actions automatically executes `.github/workflows/train.yml` on every push to `main`, retraining and committing `artifacts/model.onnx` back to the repository.
 
 ---
 
@@ -147,102 +139,13 @@ dependencies:
   onnxruntime: ^1.1.0
 ```
 
-### 2. Flutter Dart Code (`main.dart`):
+### 2. Live Model Download URL:
 
-```dart
-import 'dart:io';
-import 'dart:typed_data';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
-import 'package:onnxruntime/onnxruntime.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Tourism ML Predictor')),
-        body: Center(
-          child: ElevatedButton(
-            onPressed: loadAndRunModelFromGitHub,
-            child: const Text('Load Model from GitHub Raw & Predict'),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Future<void> loadAndRunModelFromGitHub() async {
-    // 1. Direct GitHub Raw URL of model.onnx
-    const modelUrl =
-        'https://raw.githubusercontent.com/santa8232/heysanamodel/main/artifacts/model.onnx';
-
-    print('Downloading latest model from GitHub...');
-    final response = await http.get(Uri.parse(modelUrl));
-
-    if (response.statusCode == 200) {
-      // 2. Save ONNX bytes to temporary directory
-      final tempDir = await getTemporaryDirectory();
-      final modelPath = '${tempDir.path}/model.onnx';
-      final file = File(modelPath);
-      await file.writeAsBytes(response.bodyBytes);
-
-      print('Model downloaded successfully to $modelPath!');
-
-      // 3. Initialize ONNX Runtime in Flutter
-      OrtEnv.instance.init();
-      final sessionOptions = OrtSessionOptions();
-      final session = OrtSession.fromFile(file, sessionOptions);
-
-      // 4. Prepare Input Tensor [Age, Duration, TravelerType(4), PreferredActivity(4), Budget]
-      final inputData = Float32List.fromList([
-        30.0, // Age
-        7.0,  // DurationDays
-        0.0, 1.0, 0.0, 0.0, // TravelerType: Family
-        0.0, 0.0, 1.0, 0.0, // PreferredActivity: Cultural
-        1500.0 // BudgetUSD
-      ]);
-      final inputShape = [1, 11];
-
-      final inputTensor = OrtValueTensor.createTensorWithDataList(inputData, inputShape);
-      final runOptions = OrtRunOptions();
-      final outputs = session.run(runOptions, {'Features': inputTensor});
-
-      print('Inference completed! Outputs: ${outputs.length}');
-
-      // Clean up
-      inputTensor.release();
-      runOptions.release();
-      sessionOptions.release();
-      session.release();
-    } else {
-      print('Failed to load model. Status code: ${response.statusCode}');
-    }
-  }
-}
+```text
+https://raw.githubusercontent.com/Santa8232/heysanamodel/main/artifacts/model.onnx
 ```
 
----
-
-## Modifying the Dataset & Retraining
-
-To update or improve the model:
-1. Open `data/tourism_travellers.csv` and add or edit tourist data rows.
-2. Either train locally:
-   ```bash
-   ~/.dotnet/dotnet run --project src/heysanamodel.csproj --configuration Release
-   ```
-3. Or push to GitHub:
-   ```bash
-   git add data/tourism_travellers.csv
-   git commit -m "Update tourism dataset with new records"
-   git push
-   ```
-   GitHub Actions will automatically retrain and update `artifacts/model.onnx`!
+Or from GitHub Releases:
+```text
+https://github.com/Santa8232/heysanamodel/releases/latest/download/model.onnx
+```

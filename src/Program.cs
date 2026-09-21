@@ -20,9 +20,9 @@ class Program
         }
 
         // Default: Full Model Training & ONNX Export
-        Console.WriteLine("==========================================");
-        Console.WriteLine("Starting Tourism Traveller ML.NET Training");
-        Console.WriteLine("==========================================");
+        Console.WriteLine("==================================================");
+        Console.WriteLine("   Starting Manipur Tourism ML.NET Model Training ");
+        Console.WriteLine("==================================================");
 
         // Find data directory
         string dataPath = Path.Combine(baseDir, "..", "..", "..", "..", "data", "tourism_travellers.csv");
@@ -37,7 +37,7 @@ class Program
             return;
         }
 
-        Console.WriteLine($"Loading dataset from: {dataPath}");
+        Console.WriteLine($"Loading Manipur tourism dataset from: {dataPath}");
 
         // Load CSV dataset
         IDataView dataView = mlContext.Data.LoadFromTextFile<TravellerData>(
@@ -49,8 +49,8 @@ class Program
         // Split data 80% train, 20% test
         var splitData = mlContext.Data.TrainTestSplit(dataView, testFraction: 0.2);
 
-        // Define ML Pipeline
-        var pipeline = mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "Label", inputColumnName: nameof(TravellerData.PackageChosen))
+        // Define ML Pipeline predicting VisitedPlace
+        var pipeline = mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "Label", inputColumnName: nameof(TravellerData.VisitedPlace))
             .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "TravelerTypeFeat", inputColumnName: nameof(TravellerData.TravelerType)))
             .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "PreferredActivityFeat", inputColumnName: nameof(TravellerData.PreferredActivity)))
             .Append(mlContext.Transforms.Concatenate("Features",
@@ -62,7 +62,7 @@ class Program
             .Append(mlContext.MulticlassClassification.Trainers.SdcaMaximumEntropy(labelColumnName: "Label", featureColumnName: "Features"))
             .Append(mlContext.Transforms.Conversion.MapKeyToValue(outputColumnName: "PredictedLabel", inputColumnName: "PredictedLabel"));
 
-        Console.WriteLine("Training model...");
+        Console.WriteLine("Training model on Manipur tourist destinations...");
         var trainedModel = pipeline.Fit(splitData.TrainSet);
 
         // Evaluate model
@@ -106,28 +106,31 @@ class Program
         }
 
         // 3. Live Sample Prediction Demo
-        Console.WriteLine("\n------------------------------------------");
-        Console.WriteLine("🧪 Running Sample Prediction Demo:");
-        Console.WriteLine("------------------------------------------");
+        Console.WriteLine("\n--------------------------------------------------");
+        Console.WriteLine("🧪 Running Manipur Tourist Place Prediction Demo:");
+        Console.WriteLine("--------------------------------------------------");
         var predEngine = mlContext.Model.CreatePredictionEngine<TravellerData, TravellerPrediction>(trainedModel);
 
         var testCases = new[]
         {
-            new TravellerData { Age = 23, DurationDays = 3, TravelerType = "Solo", PreferredActivity = "Backpacking", BudgetUSD = 450 },
-            new TravellerData { Age = 30, DurationDays = 7, TravelerType = "Family", PreferredActivity = "Cultural", BudgetUSD = 1500 },
-            new TravellerData { Age = 52, DurationDays = 14, TravelerType = "Couple", PreferredActivity = "Luxury", BudgetUSD = 6500 }
+            new TravellerData { Age = 24, DurationDays = 4, TravelerType = "Solo", PreferredActivity = "Trekking", BudgetUSD = 180 },
+            new TravellerData { Age = 32, DurationDays = 3, TravelerType = "Couple", PreferredActivity = "Boating", BudgetUSD = 270 },
+            new TravellerData { Age = 45, DurationDays = 1, TravelerType = "Family", PreferredActivity = "Historical", BudgetUSD = 90 },
+            new TravellerData { Age = 35, DurationDays = 3, TravelerType = "Family", PreferredActivity = "Wildlife", BudgetUSD = 320 },
+            new TravellerData { Age = 28, DurationDays = 5, TravelerType = "Friends", PreferredActivity = "Adventure", BudgetUSD = 440 },
+            new TravellerData { Age = 40, DurationDays = 1, TravelerType = "Family", PreferredActivity = "Shopping", BudgetUSD = 170 }
         };
 
         foreach (var tc in testCases)
         {
             var result = predEngine.Predict(tc);
             Console.WriteLine($"Tourist: Age {tc.Age}, {tc.DurationDays} Days, {tc.TravelerType}, {tc.PreferredActivity}, ${tc.BudgetUSD}");
-            Console.WriteLine($"  ➔ Recommended Package: [{result.PredictedPackage.ToUpper()}]\n");
+            Console.WriteLine($"  ➔ Recommended Place: [{result.PredictedPlace}]\n");
         }
 
-        Console.WriteLine("==========================================");
-        Console.WriteLine("Training & Demo Completed Successfully!");
-        Console.WriteLine("==========================================");
+        Console.WriteLine("==================================================");
+        Console.WriteLine("  Manipur Tourism Training & Demo Completed!      ");
+        Console.WriteLine("==================================================");
     }
 
     static void RunDirectPrediction(string[] args, MLContext mlContext, string baseDir)
@@ -147,10 +150,9 @@ class Program
 
         // Fast load existing model (no retraining needed)
         ITransformer loadedModel;
-        DataViewSchema modelSchema;
         using (var stream = new FileStream(zipPath, FileMode.Open, FileAccess.Read, FileShare.Read))
         {
-            loadedModel = mlContext.Model.Load(stream, out modelSchema);
+            loadedModel = mlContext.Model.Load(stream, out _);
         }
 
         var predEngine = mlContext.Model.CreatePredictionEngine<TravellerData, TravellerPrediction>(loadedModel);
@@ -176,7 +178,7 @@ class Program
             var pred = predEngine.Predict(input);
 
             Console.WriteLine("==================================================");
-            Console.WriteLine("      HeySanaModel - Instant Prediction Result    ");
+            Console.WriteLine("   HeySanaModel - Manipur Place Recommendation    ");
             Console.WriteLine("==================================================");
             Console.WriteLine($"👤 Tourist Profile:");
             Console.WriteLine($"   - Age:                {input.Age} years");
@@ -185,38 +187,38 @@ class Program
             Console.WriteLine($"   - Preferred Activity: {input.PreferredActivity}");
             Console.WriteLine($"   - Budget:             ${input.BudgetUSD:N0} USD");
             Console.WriteLine("--------------------------------------------------");
-            Console.WriteLine($"🌟 Recommended Package:  [{pred.PredictedPackage.ToUpper()}]");
+            Console.WriteLine($"📍 Recommended Place:   🌟 {pred.PredictedPlace} 🌟");
             Console.WriteLine("==================================================");
             return;
         }
 
         // Scenario B: Interactive CLI prompts
         Console.WriteLine("==================================================");
-        Console.WriteLine("    HeySanaModel - Interactive Tourist Prediction ");
+        Console.WriteLine("  HeySanaModel - Manipur Tourist Place Predictor  ");
         Console.WriteLine("==================================================");
 
-        Console.Write("Enter Tourist Age (e.g. 28): ");
-        string ageInput = Console.ReadLine() ?? "28";
+        Console.Write("Enter Tourist Age (e.g. 26): ");
+        string ageInput = Console.ReadLine() ?? "26";
         float.TryParse(ageInput, out float parsedAge);
-        if (parsedAge == 0) parsedAge = 28;
+        if (parsedAge == 0) parsedAge = 26;
 
-        Console.Write("Enter Trip Duration in Days (e.g. 5): ");
-        string daysInput = Console.ReadLine() ?? "5";
+        Console.Write("Enter Trip Duration in Days (e.g. 3): ");
+        string daysInput = Console.ReadLine() ?? "3";
         float.TryParse(daysInput, out float parsedDays);
-        if (parsedDays == 0) parsedDays = 5;
+        if (parsedDays == 0) parsedDays = 3;
 
         Console.Write("Enter Traveler Type (Solo / Friends / Family / Couple): ");
-        string typeInput = Console.ReadLine() ?? "Solo";
-        if (string.IsNullOrWhiteSpace(typeInput)) typeInput = "Solo";
+        string typeInput = Console.ReadLine() ?? "Friends";
+        if (string.IsNullOrWhiteSpace(typeInput)) typeInput = "Friends";
 
-        Console.Write("Enter Preferred Activity (Backpacking / Sightseeing / Adventure / Cultural / Relaxation / Luxury): ");
-        string actInput = Console.ReadLine() ?? "Sightseeing";
-        if (string.IsNullOrWhiteSpace(actInput)) actInput = "Sightseeing";
+        Console.Write("Enter Preferred Activity (Trekking / Boating / Cultural / Wildlife / Historical / Shopping / Camping / Nature): ");
+        string actInput = Console.ReadLine() ?? "Trekking";
+        if (string.IsNullOrWhiteSpace(actInput)) actInput = "Trekking";
 
-        Console.Write("Enter Budget in USD (e.g. 750): ");
-        string budgetInput = Console.ReadLine() ?? "750";
+        Console.Write("Enter Budget in USD (e.g. 200): ");
+        string budgetInput = Console.ReadLine() ?? "200";
         float.TryParse(budgetInput, out float parsedBudget);
-        if (parsedBudget == 0) parsedBudget = 750;
+        if (parsedBudget == 0) parsedBudget = 200;
 
         var interactiveInput = new TravellerData
         {
@@ -231,7 +233,7 @@ class Program
 
         Console.WriteLine("\n--------------------------------------------------");
         Console.WriteLine($"👤 Tourist Profile: Age {parsedAge}, {parsedDays} Days, {typeInput}, {actInput}, ${parsedBudget:N0}");
-        Console.WriteLine($"🌟 Recommended Package: [{interactiveResult.PredictedPackage.ToUpper()}]");
+        Console.WriteLine($"📍 Recommended Place: 🌟 {interactiveResult.PredictedPlace} 🌟");
         Console.WriteLine("==================================================");
     }
 }

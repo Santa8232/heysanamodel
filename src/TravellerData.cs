@@ -2,7 +2,7 @@ using Microsoft.ML.Data;
 
 namespace HeySanaModel;
 
-// Simple class to map CSV columns to C# properties
+// Class to map CSV columns to C# properties
 public class TravellerData
 {
     [LoadColumn(0)]
@@ -21,5 +21,5 @@ public class TravellerData
     public float BudgetUSD { get; set; }
 
     [LoadColumn(5)]
-    public string PackageChosen { get; set; } = string.Empty;
+    public string VisitedPlace { get; set; } = string.Empty;
 }

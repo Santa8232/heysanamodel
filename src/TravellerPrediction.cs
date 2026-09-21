@@ -2,11 +2,14 @@ using Microsoft.ML.Data;
 
 namespace HeySanaModel;
 
-// Simple class holding prediction outputs
+// Class holding prediction outputs for visited places
 public class TravellerPrediction
 {
     [ColumnName("PredictedLabel")]
-    public string PredictedPackage { get; set; } = string.Empty;
+    public string PredictedPlace { get; set; } = string.Empty;
 
     public float[] Score { get; set; } = Array.Empty<float>();
+
+    // Alias for compatibility
+    public string PredictedPackage => PredictedPlace;
 }

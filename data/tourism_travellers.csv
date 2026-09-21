@@ -1,21 +1,49 @@
-Age,DurationDays,TravelerType,PreferredActivity,BudgetUSD,PackageChosen
-22,3,Solo,Backpacking,400,Basic
-25,4,Solo,Sightseeing,600,Basic
-28,5,Friends,Adventure,800,Basic
-30,7,Family,Cultural,1500,Standard
-35,6,Family,Sightseeing,1800,Standard
-42,10,Family,Relaxation,2500,Standard
-29,5,Couple,Adventure,2200,Standard
-50,12,Couple,Luxury,5000,Premium
-45,14,Family,Luxury,6000,Premium
-38,8,Couple,Relaxation,3500,Premium
-24,3,Solo,Sightseeing,450,Basic
-31,7,Friends,Adventure,1600,Standard
-55,10,Couple,Cultural,4000,Premium
-27,4,Friends,Backpacking,550,Basic
-48,9,Family,Sightseeing,2800,Standard
-60,14,Couple,Luxury,7000,Premium
-23,5,Solo,Adventure,700,Basic
-36,6,Family,Cultural,1900,Standard
-40,11,Couple,Luxury,4800,Premium
-26,4,Solo,Sightseeing,500,Basic
+Age,DurationDays,TravelerType,PreferredActivity,BudgetUSD,VisitedPlace
+29,3,Couple,Boating,250,Loktak Lake
+34,4,Family,Relaxation,350,Loktak Lake
+26,2,Friends,Boating,180,Loktak Lake
+42,3,Family,Sightseeing,320,Loktak Lake
+31,3,Couple,Relaxation,280,Loktak Lake
+25,2,Friends,Boating,200,Loktak Lake
+38,4,Family,Relaxation,380,Loktak Lake
+30,3,Couple,Boating,270,Loktak Lake
+23,4,Solo,Trekking,160,Dzukou Valley
+26,5,Friends,Trekking,240,Dzukou Valley
+22,3,Solo,Camping,140,Dzukou Valley
+28,4,Friends,Adventure,220,Dzukou Valley
+24,5,Friends,Trekking,250,Dzukou Valley
+27,4,Solo,Adventure,190,Dzukou Valley
+25,3,Friends,Camping,180,Dzukou Valley
+29,5,Friends,Trekking,270,Dzukou Valley
+45,1,Family,Historical,80,Kangla Fort
+52,2,Couple,Cultural,140,Kangla Fort
+33,1,Solo,Historical,60,Kangla Fort
+28,1,Solo,Cultural,70,Kangla Fort
+48,2,Family,Sightseeing,120,Kangla Fort
+39,1,Couple,Historical,90,Kangla Fort
+55,2,Family,Cultural,150,Kangla Fort
+35,1,Solo,Sightseeing,65,Kangla Fort
+36,3,Family,Wildlife,300,Keibul Lamjao
+41,2,Couple,Nature,260,Keibul Lamjao
+30,3,Solo,Wildlife,220,Keibul Lamjao
+46,3,Family,Nature,340,Keibul Lamjao
+33,2,Couple,Wildlife,280,Keibul Lamjao
+27,2,Friends,Nature,210,Keibul Lamjao
+50,3,Family,Wildlife,360,Keibul Lamjao
+38,2,Couple,Nature,270,Keibul Lamjao
+24,4,Solo,Trekking,280,Shirui Hills
+28,5,Friends,Adventure,420,Shirui Hills
+31,4,Couple,Nature,380,Shirui Hills
+26,5,Friends,Trekking,400,Shirui Hills
+35,6,Couple,Adventure,520,Shirui Hills
+29,4,Solo,Nature,310,Shirui Hills
+27,5,Friends,Adventure,450,Shirui Hills
+32,6,Couple,Trekking,480,Shirui Hills
+40,1,Family,Shopping,180,Ima Keithel
+34,2,Couple,Cultural,220,Ima Keithel
+28,1,Solo,Shopping,120,Ima Keithel
+47,2,Family,Handloom,260,Ima Keithel
+53,1,Couple,Shopping,190,Ima Keithel
+31,1,Solo,Cultural,110,Ima Keithel
+44,2,Family,Handloom,240,Ima Keithel
+37,1,Couple,Shopping,160,Ima Keithel
