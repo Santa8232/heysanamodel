@@ -23,6 +23,20 @@ When you push updates to GitHub, **GitHub Actions** (`.github/workflows/train.ym
 1. Train the model on the latest dataset.
 2. Export the trained model as `model.onnx` (for Flutter) and `model.zip` (for .NET).
 3. Commit `model.onnx` back to your repository so your Flutter app can fetch the latest model live from GitHub Raw!
+4. Automatically publish `model.onnx` and `model.zip` to **GitHub Releases** for direct asset downloads.
+
+---
+
+## 📦 GitHub Releases & Direct Model Downloads
+
+Pre-trained model artifacts are published directly to **[GitHub Releases](https://github.com/Santa8232/heysanamodel/releases)**:
+
+| Model Asset | Format | Purpose | Direct Download Link |
+| :--- | :--- | :--- | :--- |
+| **`model.onnx`** | ONNX | Flutter, Android, iOS, Desktop inference | [Download Latest `model.onnx`](https://github.com/Santa8232/heysanamodel/releases/latest/download/model.onnx) |
+| **`model.zip`** | ML.NET ZIP | .NET 8 / C# native model for backend services | [Download Latest `model.zip`](https://github.com/Santa8232/heysanamodel/releases/latest/download/model.zip) |
+
+You can also view all tagged release versions on the **[Releases Page](https://github.com/Santa8232/heysanamodel/releases)**.
 
 ---
 

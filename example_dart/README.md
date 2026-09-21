@@ -60,3 +60,6 @@ In [bin/main.dart](bin/main.dart), update `githubRawUrl` with your actual GitHub
 const githubRawUrl =
     'https://raw.githubusercontent.com/santa8232/heysanamodel/main/artifacts/model.onnx';
 ```
+
+Alternatively, you can download the model binary directly from [GitHub Releases](https://github.com/Santa8232/heysanamodel/releases/latest/download/model.onnx).
+

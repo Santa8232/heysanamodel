@@ -33,8 +33,8 @@ You keep a simple table (a CSV file called `tourism_travellers.csv`) with info a
 Whenever you add new tourist info to the file and send it to GitHub, GitHub automatically starts a robot (GitHub Actions). This robot teaches the AI model using your new information.
 
 ### Step 3: Your Phone App Gets Smart Automatically
-After the AI is trained, it is saved on GitHub as a single file named `model.onnx`.
-Your mobile app (built with Flutter) downloads this file from the internet when the app opens. You **never** have to manually copy files into your phone app!
+After the AI is trained, it is automatically published to GitHub Releases as `model.onnx`.
+Your mobile app (built with Flutter) downloads this file directly over the internet when the app opens. You **never** have to manually copy files into your phone app!
 
 ---
 
