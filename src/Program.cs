@@ -9,15 +9,22 @@ class Program
 {
     static void Main(string[] args)
     {
+        var mlContext = new MLContext(seed: 42);
+        string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+
+        // Check if user requested direct prediction mode
+        if (args.Length > 0 && (args[0] == "--predict" || args[0] == "-p" || args[0] == "predict"))
+        {
+            RunDirectPrediction(args, mlContext, baseDir);
+            return;
+        }
+
+        // Default: Full Model Training & ONNX Export
         Console.WriteLine("==========================================");
         Console.WriteLine("Starting Tourism Traveller ML.NET Training");
         Console.WriteLine("==========================================");
 
-        // Create MLContext
-        var mlContext = new MLContext(seed: 42);
-
         // Find data directory
-        string baseDir = AppDomain.CurrentDomain.BaseDirectory;
         string dataPath = Path.Combine(baseDir, "..", "..", "..", "..", "data", "tourism_travellers.csv");
         if (!File.Exists(dataPath))
         {
@@ -96,7 +103,6 @@ class Program
         catch (Exception ex)
         {
             Console.WriteLine($"Note: ONNX export notice: {ex.Message}");
-            // Fallback: If OnnxConverter needs simpler pipeline, ensure zip is intact
         }
 
         // 3. Live Sample Prediction Demo
@@ -122,5 +128,110 @@ class Program
         Console.WriteLine("==========================================");
         Console.WriteLine("Training & Demo Completed Successfully!");
         Console.WriteLine("==========================================");
+    }
+
+    static void RunDirectPrediction(string[] args, MLContext mlContext, string baseDir)
+    {
+        // Locate model.zip
+        string zipPath = Path.Combine(baseDir, "..", "..", "..", "..", "artifacts", "model.zip");
+        if (!File.Exists(zipPath))
+        {
+            zipPath = Path.Combine(Directory.GetCurrentDirectory(), "artifacts", "model.zip");
+        }
+
+        if (!File.Exists(zipPath))
+        {
+            Console.WriteLine($"Error: Pre-trained model not found at {zipPath}. Please run without arguments to train first.");
+            return;
+        }
+
+        // Fast load existing model (no retraining needed)
+        ITransformer loadedModel;
+        DataViewSchema modelSchema;
+        using (var stream = new FileStream(zipPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+        {
+            loadedModel = mlContext.Model.Load(stream, out modelSchema);
+        }
+
+        var predEngine = mlContext.Model.CreatePredictionEngine<TravellerData, TravellerPrediction>(loadedModel);
+
+        // Scenario A: Arguments provided: --predict <Age> <DurationDays> <TravelerType> <PreferredActivity> <BudgetUSD>
+        if (args.Length >= 6)
+        {
+            float age = float.Parse(args[1]);
+            float days = float.Parse(args[2]);
+            string type = args[3];
+            string activity = args[4];
+            float budget = float.Parse(args[5]);
+
+            var input = new TravellerData
+            {
+                Age = age,
+                DurationDays = days,
+                TravelerType = type,
+                PreferredActivity = activity,
+                BudgetUSD = budget
+            };
+
+            var pred = predEngine.Predict(input);
+
+            Console.WriteLine("==================================================");
+            Console.WriteLine("      HeySanaModel - Instant Prediction Result    ");
+            Console.WriteLine("==================================================");
+            Console.WriteLine($"👤 Tourist Profile:");
+            Console.WriteLine($"   - Age:                {input.Age} years");
+            Console.WriteLine($"   - Trip Duration:      {input.DurationDays} days");
+            Console.WriteLine($"   - Traveler Type:      {input.TravelerType}");
+            Console.WriteLine($"   - Preferred Activity: {input.PreferredActivity}");
+            Console.WriteLine($"   - Budget:             ${input.BudgetUSD:N0} USD");
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine($"🌟 Recommended Package:  [{pred.PredictedPackage.ToUpper()}]");
+            Console.WriteLine("==================================================");
+            return;
+        }
+
+        // Scenario B: Interactive CLI prompts
+        Console.WriteLine("==================================================");
+        Console.WriteLine("    HeySanaModel - Interactive Tourist Prediction ");
+        Console.WriteLine("==================================================");
+
+        Console.Write("Enter Tourist Age (e.g. 28): ");
+        string ageInput = Console.ReadLine() ?? "28";
+        float.TryParse(ageInput, out float parsedAge);
+        if (parsedAge == 0) parsedAge = 28;
+
+        Console.Write("Enter Trip Duration in Days (e.g. 5): ");
+        string daysInput = Console.ReadLine() ?? "5";
+        float.TryParse(daysInput, out float parsedDays);
+        if (parsedDays == 0) parsedDays = 5;
+
+        Console.Write("Enter Traveler Type (Solo / Friends / Family / Couple): ");
+        string typeInput = Console.ReadLine() ?? "Solo";
+        if (string.IsNullOrWhiteSpace(typeInput)) typeInput = "Solo";
+
+        Console.Write("Enter Preferred Activity (Backpacking / Sightseeing / Adventure / Cultural / Relaxation / Luxury): ");
+        string actInput = Console.ReadLine() ?? "Sightseeing";
+        if (string.IsNullOrWhiteSpace(actInput)) actInput = "Sightseeing";
+
+        Console.Write("Enter Budget in USD (e.g. 750): ");
+        string budgetInput = Console.ReadLine() ?? "750";
+        float.TryParse(budgetInput, out float parsedBudget);
+        if (parsedBudget == 0) parsedBudget = 750;
+
+        var interactiveInput = new TravellerData
+        {
+            Age = parsedAge,
+            DurationDays = parsedDays,
+            TravelerType = typeInput,
+            PreferredActivity = actInput,
+            BudgetUSD = parsedBudget
+        };
+
+        var interactiveResult = predEngine.Predict(interactiveInput);
+
+        Console.WriteLine("\n--------------------------------------------------");
+        Console.WriteLine($"👤 Tourist Profile: Age {parsedAge}, {parsedDays} Days, {typeInput}, {actInput}, ${parsedBudget:N0}");
+        Console.WriteLine($"🌟 Recommended Package: [{interactiveResult.PredictedPackage.ToUpper()}]");
+        Console.WriteLine("==================================================");
     }
 }
