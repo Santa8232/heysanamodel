@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 class TestCase {
@@ -26,6 +27,8 @@ void main(List<String> args) async {
       'dotnet',
       ['run', '--project', csprojPath, '--configuration', 'Release', '--', '--predict', ...args],
       workingDirectory: projectDir,
+      stdoutEncoding: utf8,
+      stderrEncoding: utf8,
     );
     print(process.stdout);
     if (process.exitCode != 0) {
@@ -98,6 +101,8 @@ void main(List<String> args) async {
       'dotnet',
       ['run', '--project', csprojPath, '--configuration', 'Release', '--', '--predict', ...tc.args],
       workingDirectory: projectDir,
+      stdoutEncoding: utf8,
+      stderrEncoding: utf8,
     );
 
     final output = process.stdout.toString();
@@ -106,13 +111,13 @@ void main(List<String> args) async {
     final statusIcon = matchedExpected ? '✅ PASS' : '⚠️ MISMATCH';
     if (matchedExpected) passedCount++;
 
-    // Extract Recommended Place from output
-    final placeMatch = RegExp(r'Recommended Place:\s*🌟 (.*?) 🌟').firstMatch(output);
-    final placeName = placeMatch?.group(1) ?? 'Unknown';
+    // Extract Recommended Place from output (handles UTF-8 emojis or plain text)
+    final placeMatch = RegExp(r'Recommended Place:\s*(?:[^\w\s]*\s*)?([A-Za-z0-9&, -]+?)(?:\s*[^\w\s]*|\s*)$', multiLine: true).firstMatch(output);
+    final placeName = placeMatch?.group(1)?.trim() ?? 'Unknown';
 
-    // Extract Matching Trip Plan
-    final planMatch = RegExp(r'Matching Trip Plan:\s*🎁 (.*)').firstMatch(output);
-    final planName = planMatch?.group(1) ?? 'Unknown';
+    // Extract Matching Trip Plan (handles UTF-8 emojis or plain text)
+    final planMatch = RegExp(r'Matching Trip Plan:\s*(?:[^\w\s]*\s*)?([A-Za-z0-9&, -]+?)(?:\s*[^\w\s]*|\s*)$', multiLine: true).firstMatch(output);
+    final planName = planMatch?.group(1)?.trim() ?? 'Unknown';
 
     print('[$statusIcon] Test #${i + 1}: ${tc.name}');
     print('   👉 Input:       ${tc.args.join(" ")}');

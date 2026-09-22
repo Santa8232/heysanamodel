@@ -7,6 +7,30 @@ Age,DurationDays,TravelerType,PreferredActivity,BudgetUSD,Season,FitnessLevel,St
 25,2,Friends,Boating,200,Winter,Moderate,Homestay,Loktak Lake
 38,4,Family,Relaxation,380,Winter,Relaxed,Resort,Loktak Lake
 30,3,Couple,Boating,270,Spring,Relaxed,Homestay,Loktak Lake
+22,2,Solo,Boating,130,Winter,Relaxed,Homestay,Loktak Lake
+45,3,Family,Nature,340,Autumn,Relaxed,Resort,Loktak Lake
+27,2,Friends,Relaxation,190,Spring,Relaxed,Homestay,Loktak Lake
+36,3,Couple,Boating,300,Winter,Relaxed,Resort,Loktak Lake
+40,4,Family,Boating,370,Winter,Relaxed,Resort,Loktak Lake
+33,2,Friends,Nature,220,Autumn,Moderate,Homestay,Loktak Lake
+28,3,Solo,Boating,240,Spring,Relaxed,Homestay,Loktak Lake
+50,3,Family,Relaxation,400,Winter,Relaxed,Resort,Loktak Lake
+24,2,Couple,Boating,170,Summer,Relaxed,Homestay,Loktak Lake
+37,3,Family,Nature,310,Autumn,Relaxed,Resort,Loktak Lake
+32,3,Couple,Relaxation,290,Winter,Moderate,Resort,Loktak Lake
+44,4,Family,Boating,390,Spring,Relaxed,Resort,Loktak Lake
+21,2,Solo,Nature,140,Winter,Moderate,Homestay,Loktak Lake
+46,3,Family,Sightseeing,360,Winter,Relaxed,Resort,Loktak Lake
+35,3,Couple,Boating,260,Autumn,Relaxed,Resort,Loktak Lake
+29,2,Friends,Nature,210,Spring,Moderate,Homestay,Loktak Lake
+39,4,Family,Relaxation,410,Winter,Relaxed,Resort,Loktak Lake
+23,2,Solo,Boating,150,Summer,Moderate,Homestay,Loktak Lake
+41,3,Couple,Sightseeing,330,Winter,Relaxed,Resort,Loktak Lake
+48,3,Family,Boating,380,Autumn,Relaxed,Resort,Loktak Lake
+26,3,Friends,Relaxation,230,Winter,Relaxed,Homestay,Loktak Lake
+55,4,Family,Nature,420,Spring,Relaxed,Resort,Loktak Lake
+34,3,Couple,Boating,275,Winter,Relaxed,Resort,Loktak Lake
+28,2,Friends,Boating,185,Autumn,Moderate,Homestay,Loktak Lake
 23,4,Solo,Trekking,160,Summer,Active,Camping,Dzukou Valley
 26,5,Friends,Trekking,240,Summer,Active,Camping,Dzukou Valley
 22,3,Solo,Camping,140,Autumn,Active,Camping,Dzukou Valley
@@ -15,6 +39,29 @@ Age,DurationDays,TravelerType,PreferredActivity,BudgetUSD,Season,FitnessLevel,St
 27,4,Solo,Adventure,190,Autumn,Active,Camping,Dzukou Valley
 25,3,Friends,Camping,180,Summer,Active,Camping,Dzukou Valley
 29,5,Friends,Trekking,270,Spring,Active,Camping,Dzukou Valley
+21,3,Solo,Trekking,130,Summer,Active,Camping,Dzukou Valley
+30,4,Friends,Adventure,260,Summer,Active,Camping,Dzukou Valley
+24,3,Solo,Camping,150,Autumn,Active,Camping,Dzukou Valley
+26,4,Friends,Trekking,230,Spring,Active,Camping,Dzukou Valley
+23,5,Solo,Trekking,200,Summer,Active,Camping,Dzukou Valley
+28,3,Friends,Adventure,210,Summer,Active,Camping,Dzukou Valley
+20,4,Solo,Camping,120,Autumn,Active,Camping,Dzukou Valley
+31,5,Friends,Trekking,290,Spring,Active,Camping,Dzukou Valley
+25,4,Solo,Adventure,175,Summer,Active,Camping,Dzukou Valley
+27,3,Friends,Camping,195,Autumn,Active,Camping,Dzukou Valley
+22,4,Solo,Trekking,155,Summer,Active,Camping,Dzukou Valley
+29,5,Friends,Adventure,280,Spring,Active,Camping,Dzukou Valley
+24,3,Solo,Trekking,145,Summer,Active,Camping,Dzukou Valley
+33,4,Friends,Camping,235,Summer,Active,Camping,Dzukou Valley
+26,5,Solo,Adventure,250,Autumn,Active,Camping,Dzukou Valley
+19,3,Solo,Trekking,110,Summer,Active,Camping,Dzukou Valley
+30,4,Friends,Trekking,245,Spring,Active,Camping,Dzukou Valley
+23,3,Solo,Camping,135,Summer,Active,Camping,Dzukou Valley
+28,5,Friends,Trekking,265,Summer,Active,Camping,Dzukou Valley
+32,4,Friends,Adventure,275,Summer,Active,Camping,Dzukou Valley
+25,3,Solo,Trekking,165,Autumn,Active,Camping,Dzukou Valley
+27,4,Friends,Camping,215,Spring,Active,Camping,Dzukou Valley
+34,5,Friends,Trekking,295,Summer,Active,Camping,Dzukou Valley
 45,1,Family,Historical,80,Winter,Relaxed,Hotel,Kangla Fort
 52,2,Couple,Cultural,140,Autumn,Relaxed,Hotel,Kangla Fort
 33,1,Solo,Historical,60,Winter,Relaxed,Homestay,Kangla Fort
@@ -23,6 +70,29 @@ Age,DurationDays,TravelerType,PreferredActivity,BudgetUSD,Season,FitnessLevel,St
 39,1,Couple,Historical,90,Autumn,Relaxed,Hotel,Kangla Fort
 55,2,Family,Cultural,150,Winter,Relaxed,Hotel,Kangla Fort
 35,1,Solo,Sightseeing,65,Spring,Relaxed,Homestay,Kangla Fort
+42,1,Family,Historical,95,Winter,Relaxed,Hotel,Kangla Fort
+30,1,Solo,Cultural,55,Spring,Relaxed,Hotel,Kangla Fort
+50,2,Family,Historical,130,Autumn,Relaxed,Hotel,Kangla Fort
+37,1,Couple,Sightseeing,85,Winter,Relaxed,Hotel,Kangla Fort
+60,2,Family,Cultural,160,Winter,Relaxed,Hotel,Kangla Fort
+26,1,Solo,Historical,50,Spring,Relaxed,Homestay,Kangla Fort
+44,1,Couple,Historical,100,Autumn,Relaxed,Hotel,Kangla Fort
+47,2,Family,Sightseeing,135,Winter,Relaxed,Hotel,Kangla Fort
+32,1,Solo,Cultural,75,Winter,Relaxed,Homestay,Kangla Fort
+54,2,Couple,Historical,145,Spring,Relaxed,Hotel,Kangla Fort
+41,1,Family,Cultural,110,Autumn,Relaxed,Hotel,Kangla Fort
+58,2,Family,Historical,155,Winter,Relaxed,Hotel,Kangla Fort
+36,1,Solo,Sightseeing,68,Spring,Relaxed,Hotel,Kangla Fort
+29,1,Solo,Historical,58,Autumn,Relaxed,Homestay,Kangla Fort
+46,1,Couple,Cultural,105,Winter,Relaxed,Hotel,Kangla Fort
+51,2,Family,Sightseeing,140,Winter,Relaxed,Hotel,Kangla Fort
+38,1,Solo,Cultural,72,Spring,Relaxed,Homestay,Kangla Fort
+43,2,Couple,Historical,115,Autumn,Relaxed,Hotel,Kangla Fort
+57,2,Family,Cultural,165,Winter,Relaxed,Hotel,Kangla Fort
+34,1,Solo,Historical,62,Winter,Relaxed,Homestay,Kangla Fort
+49,2,Family,Sightseeing,125,Spring,Relaxed,Hotel,Kangla Fort
+40,1,Couple,Cultural,88,Autumn,Relaxed,Hotel,Kangla Fort
+53,2,Family,Historical,148,Winter,Relaxed,Hotel,Kangla Fort
 36,3,Family,Wildlife,300,Winter,Moderate,Resort,Keibul Lamjao
 41,2,Couple,Nature,260,Spring,Relaxed,Homestay,Keibul Lamjao
 30,3,Solo,Wildlife,220,Winter,Moderate,Homestay,Keibul Lamjao
@@ -31,6 +101,29 @@ Age,DurationDays,TravelerType,PreferredActivity,BudgetUSD,Season,FitnessLevel,St
 27,2,Friends,Nature,210,Spring,Moderate,Homestay,Keibul Lamjao
 50,3,Family,Wildlife,360,Winter,Relaxed,Resort,Keibul Lamjao
 38,2,Couple,Nature,270,Winter,Moderate,Resort,Keibul Lamjao
+44,3,Family,Wildlife,330,Autumn,Moderate,Resort,Keibul Lamjao
+29,2,Solo,Nature,190,Winter,Moderate,Homestay,Keibul Lamjao
+35,3,Couple,Wildlife,310,Spring,Relaxed,Resort,Keibul Lamjao
+52,3,Family,Nature,370,Winter,Relaxed,Resort,Keibul Lamjao
+31,2,Friends,Wildlife,240,Autumn,Moderate,Homestay,Keibul Lamjao
+48,3,Family,Wildlife,350,Winter,Moderate,Resort,Keibul Lamjao
+26,2,Solo,Nature,180,Spring,Moderate,Homestay,Keibul Lamjao
+40,3,Couple,Wildlife,320,Winter,Relaxed,Resort,Keibul Lamjao
+55,3,Family,Nature,390,Autumn,Relaxed,Resort,Keibul Lamjao
+34,2,Friends,Wildlife,250,Winter,Moderate,Homestay,Keibul Lamjao
+43,3,Family,Wildlife,335,Spring,Moderate,Resort,Keibul Lamjao
+28,2,Solo,Nature,200,Winter,Moderate,Homestay,Keibul Lamjao
+37,2,Couple,Wildlife,290,Autumn,Relaxed,Resort,Keibul Lamjao
+47,3,Family,Wildlife,355,Winter,Relaxed,Resort,Keibul Lamjao
+32,2,Friends,Nature,225,Spring,Moderate,Homestay,Keibul Lamjao
+39,3,Couple,Nature,305,Winter,Moderate,Resort,Keibul Lamjao
+45,3,Family,Wildlife,345,Autumn,Relaxed,Resort,Keibul Lamjao
+25,2,Solo,Wildlife,175,Winter,Moderate,Homestay,Keibul Lamjao
+42,3,Family,Nature,325,Winter,Moderate,Resort,Keibul Lamjao
+53,3,Family,Wildlife,375,Spring,Relaxed,Resort,Keibul Lamjao
+36,2,Couple,Wildlife,285,Autumn,Relaxed,Resort,Keibul Lamjao
+30,2,Friends,Nature,215,Winter,Moderate,Homestay,Keibul Lamjao
+49,3,Family,Wildlife,365,Winter,Moderate,Resort,Keibul Lamjao
 24,4,Solo,Trekking,280,Summer,Active,Camping,Shirui Hills
 28,5,Friends,Adventure,420,Spring,Active,Homestay,Shirui Hills
 31,4,Couple,Nature,380,Summer,Moderate,Homestay,Shirui Hills
@@ -39,6 +132,31 @@ Age,DurationDays,TravelerType,PreferredActivity,BudgetUSD,Season,FitnessLevel,St
 29,4,Solo,Nature,310,Autumn,Active,Camping,Shirui Hills
 27,5,Friends,Adventure,450,Spring,Active,Homestay,Shirui Hills
 32,6,Couple,Trekking,480,Summer,Active,Homestay,Shirui Hills
+23,4,Solo,Trekking,260,Summer,Active,Camping,Shirui Hills
+30,5,Friends,Adventure,440,Spring,Active,Homestay,Shirui Hills
+25,4,Solo,Nature,290,Autumn,Active,Camping,Shirui Hills
+34,5,Couple,Trekking,460,Summer,Active,Homestay,Shirui Hills
+22,4,Friends,Adventure,250,Summer,Active,Camping,Shirui Hills
+28,6,Couple,Trekking,500,Spring,Active,Homestay,Shirui Hills
+33,5,Friends,Nature,430,Summer,Moderate,Homestay,Shirui Hills
+27,4,Solo,Adventure,300,Autumn,Active,Camping,Shirui Hills
+26,5,Solo,Trekking,350,Summer,Active,Camping,Shirui Hills
+31,5,Friends,Adventure,470,Spring,Active,Homestay,Shirui Hills
+24,4,Friends,Trekking,275,Summer,Active,Camping,Shirui Hills
+36,6,Couple,Nature,510,Summer,Moderate,Homestay,Shirui Hills
+29,5,Solo,Trekking,340,Autumn,Active,Camping,Shirui Hills
+25,4,Friends,Adventure,285,Spring,Active,Camping,Shirui Hills
+33,5,Couple,Nature,410,Summer,Moderate,Homestay,Shirui Hills
+21,4,Solo,Trekking,240,Summer,Active,Camping,Shirui Hills
+28,5,Friends,Trekking,395,Spring,Active,Homestay,Shirui Hills
+30,4,Solo,Adventure,320,Autumn,Active,Camping,Shirui Hills
+34,6,Couple,Trekking,490,Summer,Active,Homestay,Shirui Hills
+23,4,Friends,Nature,270,Summer,Active,Camping,Shirui Hills
+27,5,Solo,Adventure,360,Spring,Active,Camping,Shirui Hills
+32,5,Couple,Trekking,445,Summer,Active,Homestay,Shirui Hills
+26,4,Friends,Adventure,305,Autumn,Active,Camping,Shirui Hills
+35,6,Friends,Trekking,530,Spring,Active,Homestay,Shirui Hills
+29,5,Solo,Nature,370,Summer,Active,Camping,Shirui Hills
 40,1,Family,Shopping,180,Winter,Relaxed,Hotel,Ima Keithel
 34,2,Couple,Cultural,220,Autumn,Relaxed,Hotel,Ima Keithel
 28,1,Solo,Shopping,120,Winter,Relaxed,Hotel,Ima Keithel
@@ -47,6 +165,30 @@ Age,DurationDays,TravelerType,PreferredActivity,BudgetUSD,Season,FitnessLevel,St
 31,1,Solo,Cultural,110,Autumn,Relaxed,Hotel,Ima Keithel
 44,2,Family,Handloom,240,Winter,Relaxed,Hotel,Ima Keithel
 37,1,Couple,Shopping,160,Spring,Relaxed,Hotel,Ima Keithel
+50,1,Family,Shopping,210,Winter,Relaxed,Hotel,Ima Keithel
+27,1,Solo,Handloom,100,Autumn,Relaxed,Hotel,Ima Keithel
+42,2,Family,Shopping,230,Spring,Relaxed,Hotel,Ima Keithel
+35,1,Couple,Cultural,170,Winter,Relaxed,Hotel,Ima Keithel
+56,2,Family,Handloom,270,Winter,Relaxed,Hotel,Ima Keithel
+33,1,Solo,Shopping,130,Autumn,Relaxed,Hotel,Ima Keithel
+46,1,Family,Shopping,200,Spring,Relaxed,Hotel,Ima Keithel
+39,2,Couple,Handloom,250,Winter,Relaxed,Hotel,Ima Keithel
+29,1,Solo,Cultural,105,Winter,Relaxed,Hotel,Ima Keithel
+48,2,Family,Shopping,245,Autumn,Relaxed,Hotel,Ima Keithel
+36,1,Couple,Handloom,175,Spring,Relaxed,Hotel,Ima Keithel
+52,1,Family,Cultural,215,Winter,Relaxed,Hotel,Ima Keithel
+25,1,Solo,Shopping,95,Autumn,Relaxed,Hotel,Ima Keithel
+43,2,Family,Handloom,255,Winter,Relaxed,Hotel,Ima Keithel
+38,1,Couple,Shopping,185,Spring,Relaxed,Hotel,Ima Keithel
+55,2,Family,Shopping,265,Winter,Relaxed,Hotel,Ima Keithel
+30,1,Solo,Handloom,115,Autumn,Relaxed,Homestay,Ima Keithel
+41,1,Family,Cultural,195,Winter,Relaxed,Hotel,Ima Keithel
+45,2,Couple,Shopping,235,Spring,Relaxed,Hotel,Ima Keithel
+32,1,Solo,Handloom,125,Winter,Relaxed,Homestay,Ima Keithel
+49,1,Family,Shopping,225,Autumn,Relaxed,Hotel,Ima Keithel
+57,2,Family,Handloom,280,Winter,Relaxed,Hotel,Ima Keithel
+26,1,Solo,Shopping,90,Spring,Relaxed,Hotel,Ima Keithel
+51,2,Family,Cultural,250,Winter,Relaxed,Hotel,Ima Keithel
 30,1,Solo,Pottery,50,Autumn,Relaxed,Homestay,Andro Cultural Village
 36,1,Couple,Craft,80,Winter,Relaxed,Homestay,Andro Cultural Village
 42,2,Family,Cultural,110,Spring,Relaxed,Hotel,Andro Cultural Village
@@ -55,6 +197,30 @@ Age,DurationDays,TravelerType,PreferredActivity,BudgetUSD,Season,FitnessLevel,St
 33,2,Family,Cultural,100,Spring,Relaxed,Hotel,Andro Cultural Village
 25,1,Solo,Craft,60,Autumn,Relaxed,Homestay,Andro Cultural Village
 38,2,Couple,Pottery,85,Winter,Relaxed,Homestay,Andro Cultural Village
+29,1,Solo,Pottery,45,Autumn,Relaxed,Homestay,Andro Cultural Village
+44,1,Family,Craft,95,Winter,Relaxed,Homestay,Andro Cultural Village
+22,1,Solo,Pottery,40,Spring,Relaxed,Homestay,Andro Cultural Village
+35,2,Couple,Cultural,105,Autumn,Relaxed,Hotel,Andro Cultural Village
+31,1,Friends,Pottery,65,Winter,Relaxed,Homestay,Andro Cultural Village
+47,2,Family,Craft,115,Spring,Relaxed,Hotel,Andro Cultural Village
+26,1,Solo,Craft,55,Autumn,Relaxed,Homestay,Andro Cultural Village
+40,1,Couple,Pottery,88,Winter,Relaxed,Homestay,Andro Cultural Village
+34,1,Friends,Craft,75,Autumn,Relaxed,Homestay,Andro Cultural Village
+51,2,Family,Cultural,120,Winter,Relaxed,Hotel,Andro Cultural Village
+28,1,Solo,Pottery,48,Spring,Relaxed,Homestay,Andro Cultural Village
+37,1,Couple,Craft,82,Autumn,Relaxed,Homestay,Andro Cultural Village
+23,1,Solo,Pottery,42,Summer,Relaxed,Homestay,Andro Cultural Village
+45,2,Family,Pottery,108,Winter,Relaxed,Homestay,Andro Cultural Village
+32,1,Friends,Craft,68,Spring,Relaxed,Homestay,Andro Cultural Village
+39,1,Couple,Cultural,92,Autumn,Relaxed,Hotel,Andro Cultural Village
+20,1,Solo,Pottery,35,Autumn,Relaxed,Homestay,Andro Cultural Village
+46,2,Family,Craft,112,Winter,Relaxed,Hotel,Andro Cultural Village
+24,1,Friends,Pottery,58,Spring,Relaxed,Homestay,Andro Cultural Village
+41,1,Couple,Pottery,87,Winter,Relaxed,Homestay,Andro Cultural Village
+53,2,Family,Cultural,125,Autumn,Relaxed,Hotel,Andro Cultural Village
+33,1,Solo,Craft,63,Winter,Relaxed,Homestay,Andro Cultural Village
+48,2,Couple,Pottery,98,Spring,Relaxed,Homestay,Andro Cultural Village
+36,1,Friends,Craft,73,Autumn,Relaxed,Homestay,Andro Cultural Village
 27,3,Solo,Caving,220,Winter,Active,Camping,Tamenglong Caves & Cascades
 29,4,Friends,Adventure,310,Autumn,Active,Camping,Tamenglong Caves & Cascades
 32,3,Couple,Rainforest,280,Spring,Moderate,Homestay,Tamenglong Caves & Cascades
@@ -63,6 +229,29 @@ Age,DurationDays,TravelerType,PreferredActivity,BudgetUSD,Season,FitnessLevel,St
 28,3,Solo,Rainforest,240,Spring,Active,Homestay,Tamenglong Caves & Cascades
 31,4,Friends,Waterfalls,320,Winter,Active,Camping,Tamenglong Caves & Cascades
 34,3,Couple,Caving,270,Autumn,Moderate,Homestay,Tamenglong Caves & Cascades
+23,3,Solo,Caving,200,Winter,Active,Camping,Tamenglong Caves & Cascades
+30,4,Friends,Rainforest,330,Spring,Active,Camping,Tamenglong Caves & Cascades
+26,3,Solo,Adventure,230,Autumn,Active,Camping,Tamenglong Caves & Cascades
+33,4,Couple,Caving,310,Winter,Moderate,Homestay,Tamenglong Caves & Cascades
+24,3,Friends,Rainforest,250,Spring,Active,Camping,Tamenglong Caves & Cascades
+36,4,Couple,Adventure,340,Autumn,Moderate,Homestay,Tamenglong Caves & Cascades
+21,3,Solo,Caving,190,Winter,Active,Camping,Tamenglong Caves & Cascades
+29,3,Friends,Waterfalls,270,Spring,Active,Camping,Tamenglong Caves & Cascades
+27,4,Solo,Rainforest,260,Autumn,Active,Homestay,Tamenglong Caves & Cascades
+32,3,Friends,Caving,280,Winter,Active,Camping,Tamenglong Caves & Cascades
+25,4,Solo,Adventure,290,Spring,Active,Camping,Tamenglong Caves & Cascades
+38,3,Couple,Caving,300,Winter,Moderate,Homestay,Tamenglong Caves & Cascades
+22,3,Solo,Rainforest,210,Autumn,Active,Camping,Tamenglong Caves & Cascades
+30,4,Friends,Waterfalls,330,Winter,Active,Camping,Tamenglong Caves & Cascades
+33,3,Couple,Adventure,285,Spring,Moderate,Homestay,Tamenglong Caves & Cascades
+26,3,Friends,Caving,245,Autumn,Active,Camping,Tamenglong Caves & Cascades
+28,4,Solo,Rainforest,275,Winter,Active,Camping,Tamenglong Caves & Cascades
+34,3,Friends,Caving,295,Spring,Active,Camping,Tamenglong Caves & Cascades
+31,4,Couple,Adventure,315,Autumn,Moderate,Homestay,Tamenglong Caves & Cascades
+24,3,Solo,Waterfalls,225,Winter,Active,Camping,Tamenglong Caves & Cascades
+37,4,Couple,Rainforest,325,Spring,Moderate,Homestay,Tamenglong Caves & Cascades
+27,3,Friends,Adventure,255,Autumn,Active,Camping,Tamenglong Caves & Cascades
+29,4,Solo,Caving,280,Winter,Active,Camping,Tamenglong Caves & Cascades
 35,2,Family,Waterfalls,130,Spring,Moderate,Resort,Sadu Chiru Waterfalls
 29,1,Couple,Nature,90,Autumn,Relaxed,Farmstay,Sadu Chiru Waterfalls
 26,2,Friends,Waterfalls,110,Summer,Moderate,Hotel,Sadu Chiru Waterfalls
@@ -71,6 +260,30 @@ Age,DurationDays,TravelerType,PreferredActivity,BudgetUSD,Season,FitnessLevel,St
 28,2,Friends,Waterfalls,120,Autumn,Moderate,Hotel,Sadu Chiru Waterfalls
 38,1,Solo,Sightseeing,75,Winter,Relaxed,Farmstay,Sadu Chiru Waterfalls
 44,2,Family,Nature,140,Spring,Relaxed,Resort,Sadu Chiru Waterfalls
+25,2,Solo,Waterfalls,100,Summer,Moderate,Hotel,Sadu Chiru Waterfalls
+36,2,Family,Waterfalls,135,Autumn,Moderate,Resort,Sadu Chiru Waterfalls
+30,1,Couple,Nature,80,Spring,Relaxed,Farmstay,Sadu Chiru Waterfalls
+33,2,Friends,Waterfalls,115,Winter,Moderate,Hotel,Sadu Chiru Waterfalls
+47,2,Family,Relaxation,155,Spring,Relaxed,Resort,Sadu Chiru Waterfalls
+27,1,Solo,Waterfalls,70,Summer,Moderate,Hotel,Sadu Chiru Waterfalls
+40,2,Family,Nature,145,Autumn,Relaxed,Resort,Sadu Chiru Waterfalls
+24,1,Friends,Waterfalls,65,Spring,Moderate,Hotel,Sadu Chiru Waterfalls
+42,2,Couple,Relaxation,140,Winter,Relaxed,Farmstay,Sadu Chiru Waterfalls
+31,1,Solo,Waterfalls,78,Summer,Moderate,Farmstay,Sadu Chiru Waterfalls
+37,2,Family,Waterfalls,138,Spring,Moderate,Resort,Sadu Chiru Waterfalls
+23,1,Friends,Nature,60,Autumn,Moderate,Hotel,Sadu Chiru Waterfalls
+45,2,Family,Relaxation,160,Winter,Relaxed,Resort,Sadu Chiru Waterfalls
+34,1,Couple,Waterfalls,95,Spring,Relaxed,Farmstay,Sadu Chiru Waterfalls
+29,2,Solo,Waterfalls,105,Summer,Moderate,Hotel,Sadu Chiru Waterfalls
+39,2,Family,Nature,142,Autumn,Relaxed,Resort,Sadu Chiru Waterfalls
+22,1,Solo,Waterfalls,58,Spring,Moderate,Hotel,Sadu Chiru Waterfalls
+46,2,Family,Waterfalls,150,Winter,Relaxed,Resort,Sadu Chiru Waterfalls
+33,1,Couple,Nature,88,Autumn,Relaxed,Farmstay,Sadu Chiru Waterfalls
+28,2,Friends,Waterfalls,112,Spring,Moderate,Hotel,Sadu Chiru Waterfalls
+43,2,Family,Relaxation,148,Winter,Relaxed,Resort,Sadu Chiru Waterfalls
+26,1,Solo,Waterfalls,72,Summer,Moderate,Farmstay,Sadu Chiru Waterfalls
+50,2,Family,Nature,165,Autumn,Relaxed,Resort,Sadu Chiru Waterfalls
+35,1,Couple,Waterfalls,92,Spring,Relaxed,Farmstay,Sadu Chiru Waterfalls
 48,2,Family,Gardens,120,Winter,Relaxed,Farmstay,Kakching & Southern Valleys
 39,1,Couple,Scenic,80,Autumn,Relaxed,Farmstay,Kakching & Southern Valleys
 33,2,Friends,Heritage,100,Spring,Relaxed,Hotel,Kakching & Southern Valleys
@@ -79,3 +292,27 @@ Age,DurationDays,TravelerType,PreferredActivity,BudgetUSD,Season,FitnessLevel,St
 30,2,Friends,Sightseeing,95,Autumn,Relaxed,Hotel,Kakching & Southern Valleys
 45,2,Family,Gardens,130,Winter,Relaxed,Farmstay,Kakching & Southern Valleys
 31,1,Solo,Heritage,70,Spring,Relaxed,Hotel,Kakching & Southern Valleys
+42,2,Family,Gardens,125,Autumn,Relaxed,Farmstay,Kakching & Southern Valleys
+28,1,Solo,Scenic,65,Spring,Relaxed,Farmstay,Kakching & Southern Valleys
+50,2,Family,Heritage,135,Winter,Relaxed,Resort,Kakching & Southern Valleys
+35,1,Couple,Gardens,85,Autumn,Relaxed,Farmstay,Kakching & Southern Valleys
+37,2,Friends,Scenic,105,Spring,Relaxed,Hotel,Kakching & Southern Valleys
+52,2,Family,Gardens,145,Winter,Relaxed,Farmstay,Kakching & Southern Valleys
+29,1,Solo,Heritage,60,Autumn,Relaxed,Hotel,Kakching & Southern Valleys
+44,2,Couple,Gardens,115,Winter,Relaxed,Farmstay,Kakching & Southern Valleys
+34,1,Friends,Scenic,78,Spring,Relaxed,Hotel,Kakching & Southern Valleys
+47,2,Family,Gardens,128,Autumn,Relaxed,Farmstay,Kakching & Southern Valleys
+26,1,Solo,Scenic,55,Spring,Relaxed,Farmstay,Kakching & Southern Valleys
+56,2,Family,Heritage,150,Winter,Relaxed,Resort,Kakching & Southern Valleys
+32,1,Couple,Gardens,82,Autumn,Relaxed,Farmstay,Kakching & Southern Valleys
+40,2,Family,Scenic,118,Spring,Relaxed,Resort,Kakching & Southern Valleys
+27,1,Solo,Gardens,58,Winter,Relaxed,Farmstay,Kakching & Southern Valleys
+46,2,Family,Heritage,132,Autumn,Relaxed,Farmstay,Kakching & Southern Valleys
+38,1,Couple,Scenic,88,Spring,Relaxed,Farmstay,Kakching & Southern Valleys
+53,2,Family,Gardens,142,Winter,Relaxed,Farmstay,Kakching & Southern Valleys
+25,1,Solo,Heritage,52,Autumn,Relaxed,Hotel,Kakching & Southern Valleys
+41,2,Couple,Gardens,110,Spring,Relaxed,Farmstay,Kakching & Southern Valleys
+55,2,Family,Scenic,148,Winter,Relaxed,Resort,Kakching & Southern Valleys
+30,1,Friends,Gardens,75,Autumn,Relaxed,Farmstay,Kakching & Southern Valleys
+43,2,Family,Heritage,122,Winter,Relaxed,Farmstay,Kakching & Southern Valleys
+49,2,Family,Gardens,138,Spring,Relaxed,Farmstay,Kakching & Southern Valleys

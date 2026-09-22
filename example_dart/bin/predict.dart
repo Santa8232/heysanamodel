@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 void main(List<String> args) async {
@@ -45,6 +46,8 @@ void main(List<String> args) async {
     'dotnet',
     ['run', '--project', csprojPath, '--configuration', 'Release', '--', '--predict', ...predictArgs],
     workingDirectory: projectDir,
+    stdoutEncoding: utf8,
+    stderrEncoding: utf8,
   );
 
   if (process.exitCode != 0) {
